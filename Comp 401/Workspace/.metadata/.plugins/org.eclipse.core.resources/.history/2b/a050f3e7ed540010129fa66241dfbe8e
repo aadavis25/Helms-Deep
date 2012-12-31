@@ -1,0 +1,20 @@
+import java.io.FileNotFoundException;
+
+public class SpellChecker {
+
+	public static void main(String[] args) throws FileNotFoundException{
+		readInWords();
+	}
+	
+	
+	public static WordList wordlist = new WordList();
+	
+	
+	
+	public static void readInWords() throws FileNotFoundException{
+		wordlist.readFile("/home/magwe25/Dropbox/Comp 401/Workspace/Program8/bin/english0.txt");
+		wordlist.readFile("/home/magwe25/Dropbox/Comp 401/Workspace/Program8/bin/english1.txt");
+		wordlist.readFile("/home/magwe25/Dropbox/Comp 401/Workspace/Program8/bin/english2.txt");
+		wordlist.readFile("/home/magwe25/Dropbox/Comp 401/Workspace/Program8/bin/english3.txt");
+	}
+}

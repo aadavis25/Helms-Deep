@@ -1,0 +1,15 @@
+function newImage = scrollLeft(image, pixels)
+% function newImage = scrollLeft(image, pixels)
+% Move the foreground image to the left the specified number of pixels,
+% filling in with zeros.  
+% Example: If  X = [0 1 0    then scrollLeft(X,1) is [1 0 0
+%                   0 1 1                             1 1 0
+%                   1 0 1]                            0 1 0]
+
+imsize = size(image);
+row = imsize (:,1);
+column = imsize (:,2);
+subImage = image (:, (pixels+1):column);
+addImage = false(row,pixels);
+newImage = [subImage addImage];
+

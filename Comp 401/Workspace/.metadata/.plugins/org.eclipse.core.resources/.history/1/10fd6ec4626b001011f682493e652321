@@ -1,0 +1,46 @@
+public class StringPermutationIterator {
+	
+	
+	String buffer;
+	int index=0;
+	StringPermutationIterator newSPI;
+	//char charAt;
+	
+	public StringPermutationIterator(String s){
+		buffer = s;
+	}
+
+	public boolean hasNext() {
+		return buffer != null;
+	}
+
+	public String next() {
+		String result = buffer;
+		buffer = createNextElement();
+		return result;
+	}
+	
+	private String createNextElement(){
+		if (index < buffer.length()-1){
+				if (index==0)
+					newSPI = new StringPermutationIterator(buffer.substring(1));
+				else
+					newSPI = new StringPermutationIterator(buffer.substring(0,index-1)+buffer.substring(index+1,buffer.length()));
+			
+				if(newSPI.hasNext()){
+					return buffer.charAt(index) + newSPI.next();
+				}
+				else{
+					System.out.println("cat");
+					index+=1;
+					newSPI = new StringPermutationIterator(buffer.substring(0,index-1)+buffer.substring(index+1,buffer.length()));
+					return buffer.charAt(index) + newSPI.next();
+					
+				}
+		}	
+		else
+			return null;
+	}
+}
+
+	

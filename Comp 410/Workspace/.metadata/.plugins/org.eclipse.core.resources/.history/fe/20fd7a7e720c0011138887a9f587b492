@@ -1,0 +1,20 @@
+
+public class GEdge {
+
+	private class GVertex{
+		String elt;
+		public GVertex(String e){
+			elt = e;
+		}
+	}
+	
+	int weight;
+	GVertex source;
+	GVertex dest;
+	
+	public GEdge(String s, String d, int w){
+		source = new GVertex(s);
+		dest = new GVertex(d);
+		weight = w;
+	}
+}

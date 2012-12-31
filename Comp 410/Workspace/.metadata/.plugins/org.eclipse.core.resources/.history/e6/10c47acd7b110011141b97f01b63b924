@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+	public class GVertex {
+		/*Data members
+		 * @elt is the element of the vertex
+		 * @listAdj is te Vertex's adjacency list
+		 */
+		String elt; 
+		ArrayList<Adjac> listAdj = new ArrayList<Adjac>();
+		
+		//constructor
+		public GVertex(String s){
+			elt = s;
+		}
+		
+		/**
+		 * 
+		 * @param s is the destination of the edge
+		 * @param w is the weight of the new edge
+		 * Adds a new directed adjacency from @this to the GVertex with String name @s
+		 */
+		private void addAdj(String s, int w){
+			Adjac a = new Adjac(TheGraph.listVert.get((Integer) TheGraph.listNames.get(s)), w);
+			listAdj.add(a);
+		}
+		

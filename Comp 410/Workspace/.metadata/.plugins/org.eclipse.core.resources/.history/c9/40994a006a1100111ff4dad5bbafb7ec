@@ -1,0 +1,49 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.junit.Test;
+
+
+
+public class TheGraphTest {
+
+	TheGraph gr = new TheGraph();
+	
+	
+	@Test
+	public void add(){
+		gr.add("Raleigh");
+		assertTrue(gr.size() == 1);
+		gr.add("Chapel_Hill");
+		assertTrue(gr.size() == 2);
+		gr.add("Durham");
+		assertTrue(gr.size() == 3);
+	}
+	@Test
+	public void addAdjac(){
+		gr.addAdjac("Raleigh", "Chapel_Hill", 7);
+		gr.addAdjac("Chapel_Hill", "Raleigh", 14);
+		gr.addAdjac("Durham", "Chapel_Hill", 100);
+		gr.addAdjac("Chapel_Hill", "Durham", 1); //No one wants to go there... except for the Taco Bell
+		int num = 0;
+		Iterator itr = gr.listNames.values().iterator();
+		while (itr.hasNext()){
+			num+= gr.listVert.get((Integer)itr.next()).listAdj.size(); 	//Iterate over each node and add the size of it's adjacency list
+																		//thereby counting the number of edges
+		}
+		assertEquals(num,4);
+		
+		ArrayList list = gr.listVert.get((Integer)gr.listNames.get("Chapel_Hill")).listAdj;
+		Iterator itr2 = list.iterator();
+		num=0;
+		while (itr2.hasNext()){
+			num = ((Adjac)list.get((Integer)itr2.next()));
+		}
+	}
+	
+	
+	
+}

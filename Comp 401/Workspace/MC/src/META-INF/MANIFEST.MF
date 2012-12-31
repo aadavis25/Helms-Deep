@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: Albert
+Build-Jdk: 1.6.0_21
+Specification-Title: WorldEdit
+Specification-Version: 4.6
+Implementation-Title: WorldEdit
+Implementation-Version: 4.6
+Implementation-Vendor-Id: com.sk89q
+WorldEdit-Version: 4.6
+Class-Path: truezip.jar WorldEdit/truezip.jar js.jar WorldEdit/js.jar
+

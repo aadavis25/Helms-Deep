@@ -1,0 +1,44 @@
+import static java.lang.System.out;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+public class BagTest {
+		@Test
+		public void add(){
+			Bag b = new Bag();
+			b.add(1);
+			b.add(12);
+			b.add(1123);
+			assertTrue(b.contains(1123));
+			assertEquals(3, b.size());
+			
+			b.add(1234);
+			assertTrue(b.contains(1234));
+			assertEquals(4, b.size());
+			
+			b.add(6);
+			assertTrue(b.contains(6));
+			assertEquals(5, b.size());
+			
+			b.add(1);
+			assertTrue(b.contains(1));
+			assertEquals(6, b.size());
+			
+			b.add(8);
+			assertTrue(b.contains(8));
+			assertEquals(7, b.size());
+			
+			b.add(9);
+			assertTrue(b.contains(9));
+			assertEquals(8, b.size());
+			
+			b.add(16);
+		assertTrue(b.contains(16));
+			
+		}
+}

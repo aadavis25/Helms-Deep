@@ -1,0 +1,52 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+public class DijAlg {
+	public class DijObj{
+		TheGraph.GVertex node;
+		boolean known = false;
+		int dist = (int) Math.pow(12, 12);
+		TheGraph.GVertex from;
+		public DijObj(TheGraph.GVertex n ){
+			node = n;
+		}
+	}
+	
+	 ArrayList<DijObj> dijList = new ArrayList<DijObj>();
+	 PriQueue que = new PriQueue();
+	/**
+	 * @param graph is the graph to perform the Dijkstra's algorithm on
+	 * @param start is the node to start at
+	 * @return an array of DijObj (Dijkstra's Objects) with Dijkstra's Alg completed
+	 */
+	public ArrayList<DijObj> dijkstras(TheGraph graph, TheGraph.GVertex start){
+		Iterator itr = graph.getListNames().keySet().iterator();
+		while (itr.hasNext()){
+			TheGraph.GVertex v = graph.getListVert().get((Integer) graph.getListNames().get(itr.next()));
+			v.setObj( new DijObj(v));
+			dijList.add(v.getObj());
+		}
+		start.getObj().dist = 0; 
+		start.getObj().from = start;
+		que.push(start, 0);
+		while (que.size > 0){
+			TheGraph.GVertex currNode = que.pop().node;
+			if (currNode.getObj().known == false){
+				Iterator itr2 = currNode.getListAdj().iterator();
+				while(itr2.hasNext()){
+					TheGraph.GVertex.Adjac edg = (TheGraph.GVertex.Adjac)itr2.next();
+					DijObj testObj = edg.vertex.getObj();
+					if((currNode.getObj().dist + edg.weight < testObj.dist) && (testObj.known == false)){
+						testObj.from = currNode;
+						testObj.dist = currNode.getObj().dist + edg.weight;
+						que.push(edg.vertex, testObj.dist);
+					}
+				}
+			}
+			currNode.getObj().known = true;
+		}		
+		return dijList;
+	}
+	
+}

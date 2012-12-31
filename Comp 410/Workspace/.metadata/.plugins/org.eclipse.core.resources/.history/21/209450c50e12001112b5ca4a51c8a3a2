@@ -1,0 +1,80 @@
+import java.util.ArrayList;
+
+
+public class PriQueue {
+	int size = 0;
+	queItem head = null;
+	queItem tail = null;
+	
+	public queItem pop(){
+		queItem temp = head;
+		System.out.println(head);
+		nullify(temp);
+		if (size == 1){
+			head = tail = null;
+		}
+		else
+			head = head.next;
+		if (size > 1){ 	
+			head.prev = null;
+		}
+		size--;
+		return temp;
+	}
+	
+	public void push(GVertex v, int p){
+		queItem q = new queItem(null, tail, v, p);
+		if (size > 1){
+			tail.next = q;
+			q.prev = tail;
+			tail = q;
+			sort(q);
+		}
+		else{
+			head = q;
+			tail = q;
+		}
+		size++;
+	}
+	
+	void sort(queItem q){
+		while(q.prev.priority > q.priority){
+			if (q == tail)
+				tail = q.prev;
+			if (q.prev == head)
+				head = q;
+			queItem tempNext = q.next;
+			queItem tempPrev = q.prev.prev;
+			q.next = q.prev;
+			q.prev = tempPrev;
+			q.next.next = tempNext;
+			q.next.prev = q;
+			if (tempNext != null) tempNext.prev = q.next;
+			if (tempPrev != null) tempPrev.next = q;
+			if (head == q) break;
+		}
+	}
+	
+	public void nullify(queItem q){
+		q.prev = null;
+		q.next = null;
+	}
+	
+	public class queItem{
+		queItem prev;
+		queItem next;
+		GVertex node;
+		int priority;
+		public queItem(queItem nex, queItem pre,GVertex n, int p){
+			next = nex;
+			prev = pre;
+			node = n;
+			priority = p;
+		}
+		
+		public queItem(GVertex n, int p){
+			node = n;
+			priority = p;
+		}
+	}
+}

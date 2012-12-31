@@ -1,0 +1,37 @@
+function z=calcPvalue 
+
+% calculates p-value of our data for statistical analysis
+
+load('testredvar'); 
+redresult = result;
+load('testgreenvar'); 
+greenresult = result;
+load('testbluevar');
+blueresult = result;
+allresult = [blueresult;greenresult;redresult]; % cumulative result matrix
+
+totalTrue=0;
+
+for i=1:length(allresult)
+    if(allresult(i,4)=='t')
+        totalTrue=totalTrue+1;
+    end
+end
+n=length(allresult); %total number of observations
+x=totalTrue/n; %sample proportion: proportion of 'true' responses (selections of suggested color)
+m=1/3; %population proportion: expected value if suggestion doesn't work (choices are random)
+s=sqrt(m*(1-m)/n); %standard deviation based on probability
+z=(x-m)/(s);
+
+% use chart to test whether p-value (z) is less than confidence interval of
+% 90% (alpha=.1). if equivalent p-value is less than .1, then there is 
+% significant evidence for us to believe that people are more likely to
+% select a color when suggested through capitalization than if they select randomly
+
+% conclusion: our calculation for the cumulative data set gives us a z-score of
+% -1.644, giving us a p-value of .09. This allows us to say with 90%
+% confidence that decisions were impacted and did not follow the
+% mean value expected if choices had simply been random. however, due to
+% the different distributions of our data, this statistical significance is
+% likely due to placement of the colors and other factors than our original
+% hypothesis.

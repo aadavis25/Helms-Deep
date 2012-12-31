@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+public class TheGraph {
+	/* data members:
+	 * @num will be where in the list of vertices the next vertex will go
+	 * @listNames will contain the String names of the vertices as the keys 
+	 * and the index of the vertex with that name as the object of that key
+	 * @listVert will contain all of the GVertex's in the graph
+	 */
+	int num = 0;
+	static HashMap listNames = new HashMap(23, (float)0.5);
+	static ArrayList<GVertex> listVert = new ArrayList<GVertex>(20);
+	
+	//constructor 
+	public TheGraph(){
+		;
+	}
+	
+	/**
+	 * add will add a nex GVertex to the graph
+	 * @param s is the String name of the Vertex
+	 * First, make a new GVertex with s as it's elt
+	 * Map the num (index) of the Vertex to the String name
+	 * Add the GVertex to the list of vertices at location num
+	 * Increment num
+	 */
+	public void add(String s){
+		GVertex v = new GVertex(s);
+		listNames.put(s, num);
+		listVert.set(num, v);
+		num++;
+	}
+	/**
+	 * 
+	 * @param s is the String name of the Vertex
+	 * @return the object GVertex associated with the String s
+	 */
+	
+	public GVertex getVert(String s){
+		return listVert.get((Integer) listNames.get(s));
+	}
+	
+}

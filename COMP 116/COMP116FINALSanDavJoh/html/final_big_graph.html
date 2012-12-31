@@ -1,0 +1,266 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>final_big_graph</title><meta name="generator" content="MATLAB 7.10"><meta name="date" content="2010-12-12"><meta name="m-file" content="final_big_graph"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% creates cumulative 3-D graph of true/false responses for all colors</span>
+<span class="comment">% combined, plotting responses versus age group and number of each type of</span>
+<span class="comment">% response</span>
+
+<span class="comment">% 'true' responses defined as selection of "suggested" color</span>
+<span class="comment">% 'false' indicates selection of either of the other colors</span>
+
+load(<span class="string">'testredvar'</span>);
+redresult = result;
+load(<span class="string">'testgreenvar'</span>);
+greenresult = result;
+load(<span class="string">'testbluevar'</span>);
+blueresult = result; <span class="comment">% loads individual color results</span>
+
+allresult = [blueresult;greenresult;redresult]; <span class="comment">% combine all results into a common array</span>
+mresults = []; fresults = [];
+<span class="keyword">for</span> j =  1:(length(allresult));
+    <span class="keyword">if</span> allresult(j,1) == <span class="string">'m'</span>
+        mresults = [mresults; allresult(j,:)];
+    <span class="keyword">elseif</span> allresult(j,1) == <span class="string">'f'</span>
+        fresults = [fresults; allresult(j,:)];
+    <span class="keyword">end</span>
+<span class="keyword">end</span> <span class="comment">% separates results into male and female responses</span>
+
+oneresallm = [];
+eighteenresallm = [];
+nineteenresallm = [];
+twentyresallm = [];
+twentyoneresallm = [];
+twentyfiveresallm = []; <span class="comment">%creates initial/blank matrices for males</span>
+
+mresult = [(str2num(mresults(:,2:3)))];
+<span class="keyword">for</span> k = 1:length(mresult)
+    <span class="keyword">if</span> (1&lt;=mresult(k,:)) &amp;&amp; (17&gt;=mresult(k,:))
+        oneresallm = [oneresallm; mresults(k,:);];
+    <span class="keyword">elseif</span> mresult(k,:) == 18
+        eighteenresallm = [eighteenresallm; mresults(k,:)];
+    <span class="keyword">elseif</span> mresult(k,:) == 19
+        nineteenresallm = [nineteenresallm; mresults(k,:)];
+    <span class="keyword">elseif</span> mresult(k,:) == 20
+        twentyresallm = [twentyresallm; mresults(k,:)];
+    <span class="keyword">elseif</span> 21&lt;=mresult(k,:) &amp;&amp; mresult(k,:)&lt;=25
+        twentyoneresallm = [twentyoneresallm; mresults(k,:)];
+    <span class="keyword">elseif</span> mresult(k,:)&gt;25
+        twentyfiveresallm = [twentyfiveresallm; mresults(k,:)];
+    <span class="keyword">end</span>
+<span class="keyword">end</span> <span class="comment">% separates male results into age groups</span>
+
+
+oneresallf = [];
+eighteenresallf = [];
+nineteenresallf = [];
+twentyresallf = [];
+twentyoneresallf = [];
+twentyfiveresallf = []; <span class="comment">%creates initial/blank matrices</span>
+
+
+fresult = [(str2num(fresults(:,2:3)))];
+<span class="keyword">for</span> k = 1:length(fresults)
+    <span class="keyword">if</span> 1&lt;=fresult(k,:) &amp;&amp; 17&gt;=fresult(k,:)
+        oneresallf = [oneresallf; fresults(k,:);];
+    <span class="keyword">elseif</span> fresult(k,:) == 18
+        eighteenresallf = [eighteenresallf; fresults(k,:)];
+    <span class="keyword">elseif</span> fresult(k,:) == 19
+        nineteenresallf = [nineteenresallf; fresults(k,:)];
+    <span class="keyword">elseif</span> fresult(k,:) == 20
+        twentyresallf = [twentyresallf; fresults(k,:)];
+    <span class="keyword">elseif</span> 21&lt;=fresult(k,:) &amp;&amp; fresult(k,:)&lt;=25
+        twentyoneresallf = [twentyoneresallf; fresults(k,:)];
+    <span class="keyword">elseif</span> fresult(k,:)&gt;25
+        twentyfiveresallf = [twentyfiveresallf; fresults(k,:)];
+    <span class="keyword">end</span>
+<span class="keyword">end</span> <span class="comment">% separates female responses into age groups</span>
+
+<span class="comment">% Creates bars for each individualized set of data</span>
+
+<span class="comment">% Male bars</span>
+tfoneallm = [(sum(oneresallm(:,4) == <span class="string">'t'</span>)), (sum(oneresallm(:,4) == <span class="string">'f'</span>))];
+tfeighteenallm =[(sum(eighteenresallm(:,4) == <span class="string">'t'</span>)), (sum(eighteenresallm(:,4) == <span class="string">'f'</span>))];
+tfnineteenallm = [(sum(nineteenresallm(:,4) == <span class="string">'t'</span>)), (sum(nineteenresallm(:,4) == <span class="string">'f'</span>))];
+tftwentyallm = [(sum(twentyresallm(:,4) == <span class="string">'t'</span>)), (sum(twentyresallm(:,4) == <span class="string">'f'</span>))];
+tftwentyoneallm = [(sum(twentyoneresallm(:,4) == <span class="string">'t'</span>)), (sum(twentyoneresallm(:,4) == <span class="string">'f'</span>))];
+tftwentyfiveallm = [(sum(twentyfiveresallm(:,4) == <span class="string">'t'</span>)), (sum(twentyfiveresallm(:,4) == <span class="string">'f'</span>))];
+
+<span class="comment">% Female bars</span>
+tfoneallf = [(sum(oneresallf(:,4) == <span class="string">'t'</span>)), (sum(oneresallf(:,4) == <span class="string">'f'</span>))];
+tfeighteenallf =[(sum(eighteenresallf(:,4) == <span class="string">'t'</span>)), (sum(eighteenresallf(:,4) == <span class="string">'f'</span>))];
+tfnineteenallf = [(sum(nineteenresallf(:,4) == <span class="string">'t'</span>)), (sum(nineteenresallf(:,4) == <span class="string">'f'</span>))];
+tftwentyallf = [(sum(twentyresallf(:,4) == <span class="string">'t'</span>)), (sum(twentyresallf(:,4) == <span class="string">'f'</span>))];
+tftwentyoneallf = [(sum(twentyoneresallf(:,4) == <span class="string">'t'</span>)), (sum(twentyoneresallf(:,4) == <span class="string">'f'</span>))];
+tftwentyfiveallf = [(sum(twentyfiveresallf(:,4) == <span class="string">'t'</span>)), (sum(twentyfiveresallf(:,4) == <span class="string">'f'</span>))];
+
+maleresall = [tfoneallm(:,1) tfoneallm(:,2); tfeighteenallm(:,1) tfeighteenallm(:,2); tfnineteenallm(:,1) tfnineteenallm(:,2); tftwentyallm(:,1) tftwentyallm(:,2); tftwentyoneallm(:,1) tftwentyoneallm(:,2); tftwentyfiveallm(:,1) tftwentyfiveallm(:,2)];
+femaleresall = [tfoneallf(:,1) tfoneallf(:,2); tfeighteenallf(:,1) tfeighteenallf(:,2); tfnineteenallf(:,1) tfnineteenallf(:,2); tftwentyallf(:,1) tftwentyallf(:,2); tftwentyoneallf(:,1) tftwentyoneallf(:,2); tftwentyfiveallf(:,1) tftwentyfiveallf(:,2)];
+
+<span class="comment">% labels graph for all 3 axes</span>
+subplot(2,1,1); bar3(maleresall, <span class="string">'b'</span>); ylabel(<span class="string">'Age Group'</span>, <span class="string">'color'</span> ,<span class="string">'b'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>); zlabel(<span class="string">'How Many Chose True or False'</span>, <span class="string">'color'</span>, <span class="string">'b'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>); title(<span class="string">'Males'</span>, <span class="string">'color'</span>, <span class="string">'b'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>, <span class="string">'fontsize'</span>, 22); set(gca,<span class="string">'XTickLabel'</span>, {<span class="string">'True'</span>, <span class="string">'False'</span>},<span class="string">'YTickLabel'</span>, {<span class="string">'1-17'</span>, <span class="string">'18'</span>, <span class="string">'19'</span>, <span class="string">'20'</span>, <span class="string">'21-25'</span>, <span class="string">'25+'</span>} );
+subplot(2,1,2); bar3(femaleresall, <span class="string">'m'</span>); set(gca,<span class="string">'XTickLabel'</span>, {<span class="string">'True'</span>, <span class="string">'False'</span>},<span class="string">'YTickLabel'</span>, {<span class="string">'1-17'</span>, <span class="string">'18'</span>, <span class="string">'19'</span>, <span class="string">'20'</span>, <span class="string">'21-25'</span>, <span class="string">'25+'</span>}); ylabel(<span class="string">'Age Group'</span>, <span class="string">'color'</span>, <span class="string">'m'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>); zlabel(<span class="string">'How Many Chose True or False'</span>, <span class="string">'color'</span>, <span class="string">'m'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>); title (<span class="string">'Females'</span>, <span class="string">'color'</span>, <span class="string">'m'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>, <span class="string">'fontsize'</span>, 22);
+</pre><img vspace="5" hspace="5" src="final_big_graph_01.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.10<br></p></div><!--
+##### SOURCE BEGIN #####
+% creates cumulative 3-D graph of true/false responses for all colors
+% combined, plotting responses versus age group and number of each type of
+% response
+
+% 'true' responses defined as selection of "suggested" color
+% 'false' indicates selection of either of the other colors
+
+load('testredvar'); 
+redresult = result;
+load('testgreenvar'); 
+greenresult = result;
+load('testbluevar');
+blueresult = result; % loads individual color results
+
+allresult = [blueresult;greenresult;redresult]; % combine all results into a common array
+mresults = []; fresults = [];
+for j =  1:(length(allresult));
+    if allresult(j,1) == 'm'
+        mresults = [mresults; allresult(j,:)]; 
+    elseif allresult(j,1) == 'f'
+        fresults = [fresults; allresult(j,:)];
+    end
+end % separates results into male and female responses
+
+oneresallm = [];
+eighteenresallm = [];
+nineteenresallm = [];
+twentyresallm = [];
+twentyoneresallm = [];
+twentyfiveresallm = []; %creates initial/blank matrices for males
+
+mresult = [(str2num(mresults(:,2:3)))];
+for k = 1:length(mresult)
+    if (1<=mresult(k,:)) && (17>=mresult(k,:))
+        oneresallm = [oneresallm; mresults(k,:);];
+    elseif mresult(k,:) == 18
+        eighteenresallm = [eighteenresallm; mresults(k,:)];
+    elseif mresult(k,:) == 19
+        nineteenresallm = [nineteenresallm; mresults(k,:)];
+    elseif mresult(k,:) == 20
+        twentyresallm = [twentyresallm; mresults(k,:)];
+    elseif 21<=mresult(k,:) && mresult(k,:)<=25
+        twentyoneresallm = [twentyoneresallm; mresults(k,:)];
+    elseif mresult(k,:)>25
+        twentyfiveresallm = [twentyfiveresallm; mresults(k,:)];
+    end
+end % separates male results into age groups
+            
+           
+oneresallf = [];
+eighteenresallf = [];
+nineteenresallf = [];
+twentyresallf = [];
+twentyoneresallf = [];
+twentyfiveresallf = []; %creates initial/blank matrices
+            
+            
+fresult = [(str2num(fresults(:,2:3)))];
+for k = 1:length(fresults)
+    if 1<=fresult(k,:) && 17>=fresult(k,:)
+        oneresallf = [oneresallf; fresults(k,:);];
+    elseif fresult(k,:) == 18
+        eighteenresallf = [eighteenresallf; fresults(k,:)];
+    elseif fresult(k,:) == 19
+        nineteenresallf = [nineteenresallf; fresults(k,:)];
+    elseif fresult(k,:) == 20
+        twentyresallf = [twentyresallf; fresults(k,:)];
+    elseif 21<=fresult(k,:) && fresult(k,:)<=25
+        twentyoneresallf = [twentyoneresallf; fresults(k,:)];
+    elseif fresult(k,:)>25
+        twentyfiveresallf = [twentyfiveresallf; fresults(k,:)];
+    end
+end % separates female responses into age groups
+                        
+% Creates bars for each individualized set of data
+
+% Male bars
+tfoneallm = [(sum(oneresallm(:,4) == 't')), (sum(oneresallm(:,4) == 'f'))];
+tfeighteenallm =[(sum(eighteenresallm(:,4) == 't')), (sum(eighteenresallm(:,4) == 'f'))];
+tfnineteenallm = [(sum(nineteenresallm(:,4) == 't')), (sum(nineteenresallm(:,4) == 'f'))];
+tftwentyallm = [(sum(twentyresallm(:,4) == 't')), (sum(twentyresallm(:,4) == 'f'))];
+tftwentyoneallm = [(sum(twentyoneresallm(:,4) == 't')), (sum(twentyoneresallm(:,4) == 'f'))];
+tftwentyfiveallm = [(sum(twentyfiveresallm(:,4) == 't')), (sum(twentyfiveresallm(:,4) == 'f'))];
+
+% Female bars
+tfoneallf = [(sum(oneresallf(:,4) == 't')), (sum(oneresallf(:,4) == 'f'))];
+tfeighteenallf =[(sum(eighteenresallf(:,4) == 't')), (sum(eighteenresallf(:,4) == 'f'))];
+tfnineteenallf = [(sum(nineteenresallf(:,4) == 't')), (sum(nineteenresallf(:,4) == 'f'))];
+tftwentyallf = [(sum(twentyresallf(:,4) == 't')), (sum(twentyresallf(:,4) == 'f'))];
+tftwentyoneallf = [(sum(twentyoneresallf(:,4) == 't')), (sum(twentyoneresallf(:,4) == 'f'))];
+tftwentyfiveallf = [(sum(twentyfiveresallf(:,4) == 't')), (sum(twentyfiveresallf(:,4) == 'f'))];
+
+maleresall = [tfoneallm(:,1) tfoneallm(:,2); tfeighteenallm(:,1) tfeighteenallm(:,2); tfnineteenallm(:,1) tfnineteenallm(:,2); tftwentyallm(:,1) tftwentyallm(:,2); tftwentyoneallm(:,1) tftwentyoneallm(:,2); tftwentyfiveallm(:,1) tftwentyfiveallm(:,2)];
+femaleresall = [tfoneallf(:,1) tfoneallf(:,2); tfeighteenallf(:,1) tfeighteenallf(:,2); tfnineteenallf(:,1) tfnineteenallf(:,2); tftwentyallf(:,1) tftwentyallf(:,2); tftwentyoneallf(:,1) tftwentyoneallf(:,2); tftwentyfiveallf(:,1) tftwentyfiveallf(:,2)];
+
+% labels graph for all 3 axes
+subplot(2,1,1); bar3(maleresall, 'b'); ylabel('Age Group', 'color' ,'b', 'fontname', 'arial black'); zlabel('How Many Chose True or False', 'color', 'b', 'fontname', 'arial black'); title('Males', 'color', 'b', 'fontname', 'arial black', 'fontsize', 22); set(gca,'XTickLabel', {'True', 'False'},'YTickLabel', {'1-17', '18', '19', '20', '21-25', '25+'} ); 
+subplot(2,1,2); bar3(femaleresall, 'm'); set(gca,'XTickLabel', {'True', 'False'},'YTickLabel', {'1-17', '18', '19', '20', '21-25', '25+'}); ylabel('Age Group', 'color', 'm', 'fontname', 'arial black'); zlabel('How Many Chose True or False', 'color', 'm', 'fontname', 'arial black'); title ('Females', 'color', 'm', 'fontname', 'arial black', 'fontsize', 22);
+
+##### SOURCE END #####
+--></body></html>

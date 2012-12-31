@@ -1,0 +1,43 @@
+public class StringPermutationIterator {
+	
+	
+	String buffer;
+	int index=0;
+	String substring
+	
+	public StringPermutationIterator(String s){
+		buffer = s;
+	}
+
+	public boolean hasNext() {
+		return buffer != null;
+	}
+
+	public String next() {
+		String result = buffer;
+		buffer = createNextElement(index);
+		return result;
+	}
+	//public String createNextElement(){
+		//return createNextElementHelper(0);
+	//}
+	private String createNextElement(int index ){
+		//for (int index =0; index< buffer.length(); index++){
+		StringPermutationIterator newSPI;
+		if (index<buffer.length()-1)	{
+				if (index==0)
+					newSPI = new StringPermutationIterator(buffer.substring(index+1));
+				else{
+					substring = buffer.substring(0,index-1)+buffer.substring(index+1,buffer.length());
+					newSPI = new StringPermutationIterator(substring);
+				}
+				return buffer.charAt(index) + newSPI.next();
+			createNextElement(index+1);
+		}
+		return "";
+	}
+}
+
+	
+
+

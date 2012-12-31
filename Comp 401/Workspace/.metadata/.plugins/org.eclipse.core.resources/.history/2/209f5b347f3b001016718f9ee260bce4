@@ -1,0 +1,39 @@
+
+public class SetComposition implements ISet {
+	private BoundedBag b;
+    public SetComposition( ) {
+       b = new BoundedBag( );
+       int [] contents = b.contents;
+       int topPosition = b.topPosition;
+    }
+   
+    @Override
+	public boolean add ( int theValue ){
+    	if (contains(theValue)){
+			return false;
+		}
+		else{ 
+			contents[topPosition+1]=theValue; 
+			topPosition += 1;
+			return true;
+		}
+	}
+    
+	public boolean contains(int theValue) {
+		return b.contains(theValue);
+	}
+	
+	public boolean remove(int theValue) {
+		return b.remove(theValue);
+	}
+	
+	public int size() {
+		return b.size();
+	}
+	
+	public String toString() {
+		return b.toString();
+	}
+    
+ 
+}

@@ -1,0 +1,166 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>final_small_graphs</title><meta name="generator" content="MATLAB 7.10"><meta name="date" content="2010-12-12"><meta name="m-file" content="final_small_graphs"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% creates small individual graphs of true/false responses for each color</span>
+<span class="comment">% 'true' responses defined as selection of "suggested" color</span>
+<span class="comment">% 'false' indicates selection of either of the other colors</span>
+
+load(<span class="string">'testredvar'</span>);
+redresult = result;
+load(<span class="string">'testgreenvar'</span>);
+greenresult = result;
+load(<span class="string">'testbluevar'</span>);
+blueresult = result; <span class="comment">% get results from color files</span>
+
+tredresult = [];
+fredresult= [];
+tblueresult = [];
+fblueresult = [];
+tgreenresult = [];
+fgreenresult = []; <span class="comment">% create initial/blank matrices</span>
+
+<span class="keyword">for</span> j =  1:(length(redresult));
+    <span class="keyword">if</span> redresult(j,4) == <span class="string">'t'</span>
+        tredresult = [tredresult; redresult(j,:)]; <span class="comment">% counts total true responses for the red suggestion survey</span>
+    <span class="keyword">elseif</span> redresult(j,4) == <span class="string">'f'</span>
+        fredresult = [fredresult; redresult(j,:)]; <span class="comment">% counts total false responses for the red suggestion survey</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">for</span> j =  1:(length(blueresult));
+    <span class="keyword">if</span> blueresult(j,4) == <span class="string">'t'</span>
+        tblueresult = [tblueresult; blueresult(j,:)]; <span class="comment">% counts total true responses for the blue suggestion survey</span>
+    <span class="keyword">elseif</span> blueresult(j,4) == <span class="string">'f'</span>
+        fblueresult = [fblueresult; blueresult(j,:)]; <span class="comment">% counts total false responses for the blue suggestion survey</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">for</span> j =  1:(length(greenresult));
+    <span class="keyword">if</span> greenresult(j,4) == <span class="string">'t'</span>
+        tgreenresult = [tgreenresult; greenresult(j,:)]; <span class="comment">% counts total true responses for the green suggestion survey</span>
+    <span class="keyword">elseif</span> greenresult(j,4) == <span class="string">'f'</span>
+        fgreenresult = [fgreenresult; greenresult(j,:)]; <span class="comment">% counts total false responses for the green suggestion survey</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="comment">% Create red subplot</span>
+red = [length(tredresult) length(fredresult)];
+subplot(3,1,1); bar3(red, <span class="string">'r'</span>); zlabel(<span class="string">'How Many Chose'</span>, <span class="string">'color'</span>, <span class="string">'r'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>); title(<span class="string">'Red Test'</span>, <span class="string">'color'</span>, <span class="string">'r'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>, <span class="string">'fontsize'</span>, 22); set(gca,<span class="string">'YTickLabel'</span>, {<span class="string">'True'</span>, <span class="string">'False'</span>} );
+<span class="comment">% Create blue subplot</span>
+blue = [length(tblueresult) length(fblueresult)];
+subplot(3,1,2); bar3(blue, <span class="string">'b'</span>); zlabel(<span class="string">'How Many Chose'</span>, <span class="string">'color'</span>, <span class="string">'b'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>); title(<span class="string">'Blue Test'</span>, <span class="string">'color'</span>, <span class="string">'b'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>, <span class="string">'fontsize'</span>, 22); set(gca,<span class="string">'YTickLabel'</span>, {<span class="string">'True'</span>, <span class="string">'False'</span>} );
+<span class="comment">% Create green subplot</span>
+green = [length(tgreenresult) length(fgreenresult)];
+subplot(3,1,3); bar3(green, <span class="string">'g'</span>); zlabel(<span class="string">'How Many Chose'</span>, <span class="string">'color'</span>, <span class="string">'g'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>); title(<span class="string">'Green Test'</span>, <span class="string">'color'</span>, <span class="string">'g'</span>, <span class="string">'fontname'</span>, <span class="string">'arial black'</span>, <span class="string">'fontsize'</span>, 22); set(gca,<span class="string">'YTickLabel'</span>, {<span class="string">'True'</span>, <span class="string">'False'</span>} );
+</pre><img vspace="5" hspace="5" src="final_small_graphs_01.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.10<br></p></div><!--
+##### SOURCE BEGIN #####
+% creates small individual graphs of true/false responses for each color
+% 'true' responses defined as selection of "suggested" color
+% 'false' indicates selection of either of the other colors
+
+load('testredvar'); 
+redresult = result;
+load('testgreenvar'); 
+greenresult = result;
+load('testbluevar');
+blueresult = result; % get results from color files
+
+tredresult = [];
+fredresult= [];
+tblueresult = [];
+fblueresult = [];
+tgreenresult = [];
+fgreenresult = []; % create initial/blank matrices
+
+for j =  1:(length(redresult));
+    if redresult(j,4) == 't'
+        tredresult = [tredresult; redresult(j,:)]; % counts total true responses for the red suggestion survey
+    elseif redresult(j,4) == 'f'
+        fredresult = [fredresult; redresult(j,:)]; % counts total false responses for the red suggestion survey
+    end
+end
+for j =  1:(length(blueresult));
+    if blueresult(j,4) == 't'
+        tblueresult = [tblueresult; blueresult(j,:)]; % counts total true responses for the blue suggestion survey
+    elseif blueresult(j,4) == 'f'
+        fblueresult = [fblueresult; blueresult(j,:)]; % counts total false responses for the blue suggestion survey
+    end
+end
+for j =  1:(length(greenresult));
+    if greenresult(j,4) == 't'
+        tgreenresult = [tgreenresult; greenresult(j,:)]; % counts total true responses for the green suggestion survey
+    elseif greenresult(j,4) == 'f'
+        fgreenresult = [fgreenresult; greenresult(j,:)]; % counts total false responses for the green suggestion survey
+    end
+end
+% Create red subplot
+red = [length(tredresult) length(fredresult)];
+subplot(3,1,1); bar3(red, 'r'); zlabel('How Many Chose', 'color', 'r', 'fontname', 'arial black'); title('Red Test', 'color', 'r', 'fontname', 'arial black', 'fontsize', 22); set(gca,'YTickLabel', {'True', 'False'} ); 
+% Create blue subplot
+blue = [length(tblueresult) length(fblueresult)];
+subplot(3,1,2); bar3(blue, 'b'); zlabel('How Many Chose', 'color', 'b', 'fontname', 'arial black'); title('Blue Test', 'color', 'b', 'fontname', 'arial black', 'fontsize', 22); set(gca,'YTickLabel', {'True', 'False'} ); 
+% Create green subplot
+green = [length(tgreenresult) length(fgreenresult)];
+subplot(3,1,3); bar3(green, 'g'); zlabel('How Many Chose', 'color', 'g', 'fontname', 'arial black'); title('Green Test', 'color', 'g', 'fontname', 'arial black', 'fontsize', 22); set(gca,'YTickLabel', {'True', 'False'} ); 
+
+##### SOURCE END #####
+--></body></html>

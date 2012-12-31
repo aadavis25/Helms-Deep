@@ -1,0 +1,63 @@
+import java.util.Random;
+import static java.lang.System.out;
+
+public class Sorter {
+	
+	public static void main (String[] args){
+		sort(randGen(200));
+		//out.print( sort(randGen(100)));
+		//out.print( sort(randGen(1000)));
+		//out.print( sort(randGen(10000)));
+		//out.print( sort(randGen(20000)));
+		//out.print( sort(randGen(30000)));
+		//out.print( sort(randGen(40000)));
+		//out.print( sort(randGen(50000)));
+		//out.print( sort(randGen(100000)));
+	}
+	
+	public static int[] randGen(int size){
+		int[] vals = new int[size];
+	     Random gen = new Random(); 
+	     for (int i=0; i<size; i++) {
+	        vals[i] = gen.nextInt(100);//range of 100
+	       // out.println(vals[i]);
+	     }
+	     return vals;
+	}
+
+	public static int sort(int[] theArray){
+		
+		int k =(theArray.length)/2;
+		int[] sort = new int[k];
+		//add elements
+		for (int index=0;index<k;index++)
+			sort[index]=theArray[index];
+		//BubbleSort sort
+		for (int outer=1; outer < k; outer++) {
+			for (int inner=0; inner < k-outer; inner++) {
+				if (sort[inner] < sort[inner+1]) {
+					int temp = sort[inner+1]; 
+					sort[inner] = sort[inner+1];  
+					sort[inner] = temp;
+				}
+			}
+		}
+		for (int index=0;index<k;index++)
+			out.println(sort[index]);
+		for (int theArrayIndex=k+1; theArrayIndex < theArray.length; theArrayIndex++) {
+			if (theArray[theArrayIndex]>sort[k-1]){ //does this element matter?
+				for (int sortIndex=0;sortIndex<k;sortIndex++){
+					if (theArray[theArrayIndex]>sort[sortIndex]){//Find out where theArray[theArrayIndex] belongs in sort, 
+						for (int innerIndex=k-1; innerIndex > sortIndex+1; innerIndex--) {
+								sort[innerIndex] = sort[innerIndex-1];  //move everything down one place starting from the end,
+						}
+						sort[sortIndex] = theArray[theArrayIndex]; //and replace the element in theArray[theArrayIndex]'s new spot
+						break; //breaks out of second for-loop, no need to look further
+					}
+				}
+			}
+		}
+		return sort[k-1];	//element at sort[k] should be the kth element in theArray
+	}
+}
+		

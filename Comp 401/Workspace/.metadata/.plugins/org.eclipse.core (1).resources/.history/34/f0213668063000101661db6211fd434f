@@ -1,0 +1,77 @@
+import static java.lang.System.out;
+import java.util.Iterator;
+
+
+public class BoundedBag {
+
+	// Data members
+	private int [] contents; // Elements of the BoundedBag.
+	private int topPosition; // Index of highest used position in contents.
+
+	/**
+	 * Default constructor - creates an empty BoundedBag.
+	 */
+	public BoundedBag() {
+		contents = new int [4];
+		topPosition = -1;
+	}
+
+	public void add( int theValue) {
+		contents[topPosition+1]=theValue; 
+	}
+	
+	// returns true if theValue is in the BoundedBag
+	public boolean contains(int theValue ) {
+		boolean result=false;
+		for(int index=0;index<=topPosition;index++){
+			if (contents[index]==theValue){
+				result=true;
+				break;
+			}
+		}
+		return result;
+	}
+		
+	// deletes theValue from the BoundedBag
+	// returns true if theValue was in the Bag,
+	// otherwise return false.
+	public boolean remove(int theValue) {
+		boolean result=false;
+		for( int index=0;index<=topPosition;index++ ){
+			if (contents[index]==theValue)
+				result=true;
+				for ( int indexinner=index;indexinner<=topPosition;indexinner++ ){
+						contents[indexinner]=contents[indexinner+1];
+				}
+		}
+		return result;
+	}
+	
+	
+
+	/**
+	 * Return number of elements in the BoundedBag.
+	 */
+	public int size() {
+		return 1 + topPosition;
+	}
+	
+	/**
+	 * Convert the BoundedBag to a String.
+	 * Optional challenge - find a MUCH more efficient
+	 * way to do this.
+	 */
+	@Override
+	public String toString() {
+		String retValue = "";
+		if( -1 == topPosition ) return "empty";
+		else {
+			for(int i = 0; i <= topPosition; i++ ) {
+				if( i > 0 ) retValue += ", ";
+				retValue = retValue + contents[i];
+			}
+		
+		return retValue;
+	}
+}
+}

@@ -1,0 +1,18 @@
+load('testredvar'); 
+allresult = result;
+load('testgreenvar'); 
+allresult = [allresult; result];
+load('testbluevar');
+allresult = [allresult; result];% combine all results into a common array
+mresult = []; fresult = [];
+for j =  1:(length(allresult));
+    if allresult(j,1) == 'm'
+        mresult = [mresult; allresult(j,:)];
+    elseif allresult(j,1) == 'f'
+        fresult = [fresult; allresult(j,:)];
+    end
+end
+truefalsem = [(sum(mresult(:,4) == 't')), (sum(mresult(:,4) == 'f'))];
+truefalsef = [(sum(fresult(:,4) == 't')), (sum(fresult(:,4) == 'f'))];
+subplot(1,2,1); bar3(1:2,truefalsem, 'b');
+subplot(1,2,2); bar3(1:2,truefalsef, 'm');

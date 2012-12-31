@@ -1,0 +1,48 @@
+public class Bag extends BoundedBag{
+	
+	@Override
+	public boolean add ( int theValue ){
+		BoundedBagIterator bagiterator = this.iterator();
+		int index = -1; /*index starts at -1 because bagiterator, running  the first time 
+					     *confirms that the first element exists, and index becomes 
+					     *index of the first element, and so on with second, the third, etc.
+					     */
+			 while (true){						//use infinite while-loop but break if !this.hasnext(); find out if bag is full
+				if (bagiterator.hasNext()){
+					bagiterator.next();
+					index++;
+				}
+				else
+					break;
+			 }
+		
+		if ( !(index == contents.length -1) ){  //if the bag isn't full, just add
+			super.add(theValue);
+			return true;
+		}
+		else{
+			BoundedBagIterator bagiterator2 = this.iterator();
+			int[] newcontents = new int [contents.length * 2];
+			
+			int count = 0;							//iterate and add all the elements in contents to newcontents 
+				while(true){							
+					newcontents[count++] = bagiterator2.next();
+				 	if( !bagiterator2.hasNext())
+				 		break;
+			}
+			
+			newcontents[contents.length] = theValue; //add theValue to the next space in newcontents 
+			contents = newcontents;
+			return true;
+		}
+		}
+		
+	
+
+	@Override
+	public int size(){
+		for ()
+	}
+
+
+}

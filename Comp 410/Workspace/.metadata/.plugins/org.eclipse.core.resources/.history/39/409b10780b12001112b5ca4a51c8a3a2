@@ -1,0 +1,76 @@
+import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import org.junit.Test;
+
+public class TheGraphTest {
+
+	TheGraph gr = new TheGraph();
+	PriQueue pq = new PriQueue();
+	
+	@Test
+	public void add(){
+		gr.add("Chapel_Hill");
+		gr.add("Raleigh");
+		gr.add("Durham");
+		assertEquals(gr.size(),3);
+	}
+	@Test
+	public void addAdjac(){
+		gr.addAdjac("Raleigh", "Chapel_Hill", 12);
+		gr.addAdjac("Chapel_Hill", "Raleigh", 7);
+		gr.addAdjac("Chapel_Hill", "Durham", 1);
+		gr.addAdjac("Durham", "Chapel_Hill", 100);
+		gr.addAdjac("Raleigh", "Durham", 1);
+		gr.addAdjac("Durham", "Raleigh", 50);
+		
+		Iterator itr = gr.listNames.keySet().iterator();
+		int num = 0;
+		while (itr.hasNext()){
+			num += gr.listVert.get((Integer) gr.listNames.get(itr.next())).listAdj.size();
+		}
+		assertEquals(num,6);
+		
+		ArrayList list = gr.listVert.get((Integer) gr.listNames.get("Chapel_Hill")).listAdj;
+		itr = list.iterator();
+		num = 0;
+		while (itr.hasNext()){
+			num += ((Adjac) itr.next()).getWeight();
+		}
+		assertEquals(num, 8);
+		
+		list = gr.listVert.get((Integer) gr.listNames.get("Durham")).listAdj;
+		itr = list.iterator();
+		num = 0;
+		while (itr.hasNext()){
+			num += ((Adjac) itr.next()).getWeight();
+		}
+		assertEquals(num, 150);
+		
+		list = gr.listVert.get((Integer) gr.listNames.get("Raleigh")).listAdj;
+		itr = list.iterator();
+		num = 0;
+		while (itr.hasNext()){
+			num += ((Adjac) itr.next()).getWeight();
+		}
+		assertEquals(num, 13);
+	}
+	@Test
+	public void priorityQueueTest(){
+		GVertex a = new GVertex("a");
+		GVertex b = new GVertex("b");
+		GVertex c = new GVertex("c");
+		GVertex d = new GVertex("d");
+		
+		pq.push(d,4);
+		pq.push(b,2);
+		pq.push(c,3);
+		pq.push(a,1);
+		assertEquals(pq.pop().node.elt, "a");
+		assertEquals(pq.pop().node.elt, "c");
+		assertEquals(pq.pop().node.elt, "b");
+		assertEquals(pq.pop().node.elt, "d");
+	}
+	
+	
+}

@@ -1,0 +1,121 @@
+import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import org.junit.Test;
+
+public class TheGraphTest {
+
+	TheGraph gr = new TheGraph();
+	PriQueue pq = new PriQueue();
+	TheGraph gr2 = new TheGraph();
+	
+	@Test
+	public void add(){
+		gr.add("Chapel_Hill");
+		gr.add("Raleigh");
+		gr.add("Durham");
+		assertEquals(gr.size(),3);
+	}
+	@Test
+	public void addAdjac(){
+		gr.add("Chapel_Hill");
+		gr.add("Raleigh");
+		gr.add("Durham");
+		gr.addAdjac("Raleigh", "Chapel_Hill", 12);
+		gr.addAdjac("Chapel_Hill", "Raleigh", 7);
+		gr.addAdjac("Chapel_Hill", "Durham", 1);
+		gr.addAdjac("Durham", "Chapel_Hill", 100);
+		gr.addAdjac("Raleigh", "Durham", 1);
+		gr.addAdjac("Durham", "Raleigh", 50);
+		
+		Iterator itr = gr.getListNames().keySet().iterator();
+		int num = 0;
+		while (itr.hasNext()){
+			num += gr.listVert.get((Integer) gr.getListNames().get(itr.next())).getListAdj().size();
+		}
+		assertEquals(num,6);
+		
+		ArrayList list = gr.listVert.get((Integer) gr.getListNames().get("Chapel_Hill")).getListAdj();
+		itr = list.iterator();
+		num = 0;
+		while (itr.hasNext()){
+			num += ((TheGraph.GVertex.Adjac) itr.next()).getWeight();
+		}
+		assertEquals(num, 8);
+		
+		list = gr.listVert.get((Integer) gr.getListNames().get("Durham")).getListAdj();
+		itr = list.iterator();
+		num = 0;
+		while (itr.hasNext()){
+			num += ((TheGraph.GVertex.Adjac) itr.next()).getWeight();
+		}
+		assertEquals(num, 150);
+		
+		list = gr.listVert.get((Integer) gr.getListNames().get("Raleigh")).getListAdj();
+		itr = list.iterator();
+		num = 0;
+		while (itr.hasNext()){
+			num += ((TheGraph.GVertex.Adjac) itr.next()).getWeight();
+		}
+		assertEquals(num, 13);
+	}
+	@Test
+	public void priorityQueueTest(){
+		TheGraph.GVertex a = gr.new GVertex("a");
+		TheGraph.GVertex b = gr.new GVertex("b");;
+		TheGraph.GVertex c = gr.new GVertex("c");
+		TheGraph.GVertex d = gr.new GVertex("d");
+		
+		pq.push(d,4);
+		pq.push(b,2);
+		pq.push(c,3);
+		pq.push(a,1);
+		assertEquals(pq.size, 4);
+		
+		assertEquals(pq.pop().node.elt, "a"); 
+		assertEquals(pq.pop().node.elt, "b");
+		assertEquals(pq.pop().node.elt, "c");
+		assertEquals(pq.pop().node.elt, "d");
+		assertEquals(pq.size, 0);
+	}
+	@Test
+	public void dijkstras(){
+		
+		gr2.add("A");
+		gr2.add("B");
+		gr2.add("C");
+		gr2.add("D");
+		gr2.add("E");
+		gr2.add("F");
+		gr2.add("G");
+		gr2.add("H");
+		gr2.addAdjac("A", "B", 9);
+		gr2.addAdjac("A", "F", 14);
+		gr2.addAdjac("A", "G", 15);
+		gr2.addAdjac("B", "C", 24);
+		gr2.addAdjac("F", "C", 18);
+		gr2.addAdjac("F", "G", 5);
+		gr2.addAdjac("F", "E", 30);
+		gr2.addAdjac("C", "E", 2);
+		gr2.addAdjac("G", "E", 20);
+		gr2.addAdjac("G", "H", 44);
+		gr2.addAdjac("E", "D", 6);
+		gr2.addAdjac("D", "C", 6);
+		gr2.addAdjac("E", "H", 16);
+		gr2.addAdjac("C", "H", 19);
+		
+		DijAlg dijk = new DijAlg();
+		ArrayList<DijAlg.DijObj> dijList = dijk.dijkstras(gr2, gr2.getVert("A"));
+		for(int index = 0; index < dijList.size(); index++){
+			String s = "";
+			DijAlg.DijObj dij = dijList.get(index);
+			while (dij.node.elt.compareTo("A") != 0){
+				s = dij.node.elt + " " + s;
+				dij = dij.from.obj;
+			}
+			System.out.println("A " + s);
+		}
+	}
+	
+	
+}

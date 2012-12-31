@@ -1,0 +1,20 @@
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+
+
+public class TheGraphTest {
+
+	TheGraph gr = new TheGraph();
+	
+	@Test
+	public void add(){
+		gr.add("Chapel_Hill");
+		gr.add("Raleigh");
+		gr.add("Durham");
+		
+		assertEquals(gr.size(),3);
+	}
+	
+}

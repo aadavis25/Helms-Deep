@@ -1,0 +1,11 @@
+import java.util.ArrayList;
+
+public interface CompareFiles {
+
+	   // @returns
+	   //   < 0 if first comes before second
+	   //   0 no preference in relative position
+	   //   > 1 if second comes before first
+	   int compare(ArrayList<Object> file1, ArrayList<Object> file2);
+	
+}

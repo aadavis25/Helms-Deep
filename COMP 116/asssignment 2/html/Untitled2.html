@@ -1,0 +1,199 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      --><title>Untitled2</title><meta name="generator" content="MATLAB 7.10"><meta name="date" content="2010-09-13"><meta name="m-file" content="Untitled2"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Assignment 2 - Plotting</a></li><li><a href="#3">Question 1 Plot a line graph of depths for both lakes. (Is there an obvious yearly cycle?)</a></li><li><a href="#4">Question 2 The targets for Jordan and Falls lakes are 216ft and 251.5ft, respectively. For how many</a></li><li><a href="#5">months was each lake over its target?</a></li><li><a href="#6">Question 3  Plot the rain in August as a line graph over years for both</a></li><li><a href="#7">lakes.</a></li><li><a href="#8">Question 4 Compute the average height that Falls Lake is above its target for each month over the 23</a></li><li><a href="#9">years from 1985-2007, and display as bar chart with a bar for each month. Plot the line</a></li><li><a href="#10">for 2007 in red on top of this bar chart.</a></li><li><a href="#11">Question 5 Determine how many days had more than 1 in of precipitation at the two sites in hawrain,</a></li><li><a href="#12">and how many days had less than &frac14; in.</a></li><li><a href="#13">Question 6 Plot line graphs showing the cumulative amount of rain over the past year at both sites.</a></li><li><a href="#14">Which of the two locations (1 or 2) received the most rain?</a></li><li><a href="#15">Question 7</a></li><li><a href="#16">Question  8 Determine the maximum increase and maximum decrease in height from one day to the</a></li><li><a href="#17">next for each of the four gauges in hawgage.</a></li></ul></div><pre class="codeinput"><span class="comment">%1.Yes, while increasing overall</span>
+<span class="comment">%2. jord-178 fall-71</span>
+<span class="comment">%3.</span>
+<span class="comment">%4.</span>
+<span class="comment">%5. 7 each, 1- 330 2- 324</span>
+<span class="comment">%6. site 2</span>
+<span class="comment">%7. site 1- 210.23</span>
+<span class="comment">%site2-1.46</span>
+<span class="comment">%site3-3.06</span>
+<span class="comment">%site4-2.55</span>
+<span class="comment">%8. 1 - 1.16</span>
+ <span class="comment">%   2 - 7.15</span>
+  <span class="comment">%  3 - 2.57</span>
+   <span class="comment">% 4 - 4.37</span>
+</pre><h2>Assignment 2 - Plotting<a name="2"></a></h2><pre class="codeinput"><span class="comment">%Aaron Davis</span>
+</pre><h2>Question 1 Plot a line graph of depths for both lakes. (Is there an obvious yearly cycle?)<a name="3"></a></h2><pre class="codeinput">plot (x1, jordepth, x1, falldept, <span class="string">'g'</span>)
+title(<span class="string">'Depth of Fall and Jordan Lakes monthly 1985 - 2007'</span>)
+legend (<span class="string">'Jordan Lake'</span>, <span class="string">'Fall Lake'</span>)
+xlabel(<span class="string">'Months'</span>)
+ylabel (<span class="string">'Depth in Inches'</span>)
+<span class="comment">%There is a slight pattern, but nothing very obvious or substantial.</span>
+</pre><img vspace="5" hspace="5" src="Untitled2_01.png" alt=""> <h2>Question 2 The targets for Jordan and Falls lakes are 216ft and 251.5ft, respectively. For how many<a name="4"></a></h2><h2>months was each lake over its target?<a name="5"></a></h2><pre class="codeinput"><span class="comment">%Jordan Lake was over it's target depth 178 months and Fall</span>
+<span class="comment">%Lake was over it's target 71 months.</span>
+</pre><h2>Question 3  Plot the rain in August as a line graph over years for both<a name="6"></a></h2><h2>lakes.<a name="7"></a></h2><pre class="codeinput">x2 = [1:1:23];
+plot (x2,fallaugust, <span class="string">'-r*'</span>, x2, jordaugust, <span class="string">'-b+'</span>)
+legend (<span class="string">'Fall Lake'</span>,<span class="string">'Jordan Lake'</span>)
+title (<span class="string">'Depth of Fall and Jordan Lakes in August 1985 - 12007'</span>)
+ylabel (<span class="string">'Depth in Inches'</span>)
+xlabel (<span class="string">'Years after 1985'</span>)
+legend (<span class="string">'Fall Lake'</span>, <span class="string">'Jordan Lake'</span>)
+</pre><img vspace="5" hspace="5" src="Untitled2_02.png" alt=""> <h2>Question 4 Compute the average height that Falls Lake is above its target for each month over the 23<a name="8"></a></h2><h2>years from 1985-2007, and display as bar chart with a bar for each month. Plot the line<a name="9"></a></h2><h2>for 2007 in red on top of this bar chart.<a name="10"></a></h2><pre class="codeinput">x3 = 1:1:12;
+bar (x3, y')
+hold  <span class="string">on</span>
+plot (x3, fall2007, <span class="string">'-r'</span>)
+legend(<span class="string">'Average of Each Month for all 23 Years'</span>, <span class="string">'Average for 2007'</span>)
+title(<span class="string">' Amount Above or Below Average Depth for Fall Lake 1985 - 2007'</span>)
+xlabel(<span class="string">'Month'</span>)
+ylabel(<span class="string">'Amount Above or Below in Inches'</span>)
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="Untitled2_03.png" alt=""> <h2>Question 5 Determine how many days had more than 1 in of precipitation at the two sites in hawrain,<a name="11"></a></h2><h2>and how many days had less than &frac14; in.<a name="12"></a></h2><pre class="codeinput"><span class="comment">% Each site had 7 days with more than 1 in. of rain. Site 1 had 330 days</span>
+<span class="comment">% with less than a quarter of an inch of rain. Site 2 had 324 days with</span>
+<span class="comment">% less than a quarter of an inch of rain.</span>
+</pre><h2>Question 6 Plot line graphs showing the cumulative amount of rain over the past year at both sites.<a name="13"></a></h2><h2>Which of the two locations (1 or 2) received the most rain?<a name="14"></a></h2><pre class="codeinput">x6 = 1:1:365;
+plot (x6, cumsum(hawrain1), x6, cumsum(hawrain2), <span class="string">'r'</span>)
+legend (<span class="string">'Hawrain site 1'</span>, <span class="string">'hawrain site 2'</span>)
+xlabel(<span class="string">'Days After 29 Aug 07 - 28 Aug 08'</span>)
+ylabel (<span class="string">'Cumulative In. Of Rain'</span>)
+title(<span class="string">'Cumulative Amount Of Rain At Hawrain sites 1 &amp; 2'</span>)
+<span class="comment">%Hawrain site 2 had the most cumulative amount of rain.</span>
+</pre><img vspace="5" hspace="5" src="Untitled2_04.png" alt=""> <h2>Question 7<a name="15"></a></h2><h2>Question  8 Determine the maximum increase and maximum decrease in height from one day to the<a name="16"></a></h2><h2>next for each of the four gauges in hawgage.<a name="17"></a></h2><p class="footer"><br>
+      Published with MATLAB&reg; 7.10<br></p></div><!--
+##### SOURCE BEGIN #####
+%1.Yes, while increasing overall
+%2. jord-178 fall-71
+%3. 
+%4.
+%5. 7 each, 1- 330 2- 324
+%6. site 2
+%7. site 1- 210.23
+%site2-1.46
+%site3-3.06
+%site4-2.55
+%8. 1 - 1.16
+ %   2 - 7.15
+  %  3 - 2.57
+   % 4 - 4.37
+
+%% Assignment 2 - Plotting
+%Aaron Davis
+
+%% Question 1 Plot a line graph of depths for both lakes. (Is there an obvious yearly cycle?)
+plot (x1, jordepth, x1, falldept, 'g')
+title('Depth of Fall and Jordan Lakes monthly 1985 - 2007')
+legend ('Jordan Lake', 'Fall Lake')
+xlabel('Months')
+ylabel ('Depth in Inches')
+%There is a slight pattern, but nothing very obvious or substantial.
+
+%% Question 2 The targets for Jordan and Falls lakes are 216ft and 251.5ft, respectively. For how many
+%% months was each lake over its target?
+
+%Jordan Lake was over it's target depth 178 months and Fall
+%Lake was over it's target 71 months.
+
+%% Question 3  Plot the rain in August as a line graph over years for both
+%% lakes.
+
+x2 = [1:1:23];
+plot (x2,fallaugust, '-r*', x2, jordaugust, '-b+')
+legend ('Fall Lake','Jordan Lake')
+title ('Depth of Fall and Jordan Lakes in August 1985 - 12007')
+ylabel ('Depth in Inches')
+xlabel ('Years after 1985')
+legend ('Fall Lake', 'Jordan Lake')
+
+%% Question 4 Compute the average height that Falls Lake is above its target for each month over the 23
+%% years from 1985-2007, and display as bar chart with a bar for each month. Plot the line
+%% for 2007 in red on top of this bar chart.
+
+x3 = 1:1:12;
+bar (x3, y')
+hold  on
+plot (x3, fall2007, '-r')
+legend('Average of Each Month for all 23 Years', 'Average for 2007')
+title(' Amount Above or Below Average Depth for Fall Lake 1985 - 2007')
+xlabel('Month')
+ylabel('Amount Above or Below in Inches')
+hold off
+
+%% Question 5 Determine how many days had more than 1 in of precipitation at the two sites in hawrain,
+%% and how many days had less than ¼ in.
+
+% Each site had 7 days with more than 1 in. of rain. Site 1 had 330 days
+% with less than a quarter of an inch of rain. Site 2 had 324 days with
+% less than a quarter of an inch of rain.
+
+%% Question 6 Plot line graphs showing the cumulative amount of rain over the past year at both sites.
+%% Which of the two locations (1 or 2) received the most rain?
+
+x6 = 1:1:365;
+plot (x6, cumsum(hawrain1), x6, cumsum(hawrain2), 'r')
+legend ('Hawrain site 1', 'hawrain site 2')
+xlabel('Days After 29 Aug 07 - 28 Aug 08')
+ylabel ('Cumulative In. Of Rain')
+title('Cumulative Amount Of Rain At Hawrain sites 1 & 2')
+%Hawrain site 2 had the most cumulative amount of rain.
+
+%% Question 7
+
+%% Question  8 Determine the maximum increase and maximum decrease in height from one day to the
+%% next for each of the four gauges in hawgage.
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,44 @@
+import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import org.junit.Test;
+
+public class TheGraphTest {
+
+	TheGraph gr = new TheGraph();
+	
+	@Test
+	public void add(){
+		gr.add("Chapel_Hill");
+		gr.add("Raleigh");
+		gr.add("Durham");
+		assertEquals(gr.size(),3);
+	}
+	@Test
+	public void addAdjac(){
+		gr.add("Chapel_Hill");
+		gr.add("Raleigh");
+		gr.add("Durham");
+		gr.addAdjac("Raleigh", "Chapel_Hill", 12);
+		gr.addAdjac("Chapel_Hill", "Raleigh", 7);
+		gr.addAdjac("Chapel_Hill", "Durham", 1);
+		gr.addAdjac("Durham", "Chapel_Hill", 100);
+		
+		Iterator itr = gr.listNames.keySet().iterator();
+		int num = 0;
+		while (itr.hasNext()){
+			num += gr.listVert.get((Integer) gr.listNames.get(itr.next())).listAdj.size();
+		}
+		assertEquals(num,4);
+		
+		ArrayList list = gr.listVert.get((Integer) gr.listNames.get("Chapel_Hill")).listAdj;
+		Iterator itr2 = list.iterator();
+		num = 0;
+		while (itr.hasNext()){
+			num += ((Adjac) itr.next()).getWeight();
+		}
+		
+		assertEquals(num, 8);
+	}
+	
+}

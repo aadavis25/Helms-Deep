@@ -1,0 +1,29 @@
+import static java.lang.System.out;
+
+// p. 786  Write methods for problems 3, 4, 6, 7, and 9
+
+public class Hwk {
+
+	public static int[] x = new int[] { 10, 30, 70, 44, 3 };
+
+	public static void main(String[] args) {
+
+		out.println("number of odd digits in 987 = " + problem3(987));
+//		out.println("sum of digits in 987 = " + problem4(987));
+//		out.println("sum of values in x is " + problem6(x, 0));
+//		out.println("largest value in x is " + problem7(x, 0));
+	}
+
+	public static int problem3(int number) {
+	int numodds=0;
+		if (number>0){
+			if ((number % 10)%2 == 0){
+				numodds++;	
+			problem3(number);
+			}
+		}
+		
+		return numodds;
+	}
+
+}

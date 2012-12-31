@@ -1,0 +1,48 @@
+public class StringPermutationIterator {
+	
+	
+	String buffer;
+	int index=0;
+	String substring;
+	//char charAt;
+	
+	public StringPermutationIterator(String s){
+		buffer = s;
+	}
+
+	public boolean hasNext() {
+		return buffer != null;
+	}
+
+	public String next() {
+		String result = buffer;
+		buffer = createNextElement();
+		return result;
+	}
+	//public String createNextElement(){
+		//return createNextElementHelper(0);
+	//}
+	private String createNextElement(){
+		//for (int index =0; index< buffer.length(); index++){
+		StringPermutationIterator newSPI;
+		if (index<buffer.length()-1){
+				if (index==0)
+					newSPI = new StringPermutationIterator(buffer.substring(1));
+				else{
+					substring = buffer.substring(0,index-1)+buffer.substring(index+1,buffer.length());
+					newSPI = new StringPermutationIterator(substring);
+				}
+				if(newSPI.hasNext())
+					return buffer.charAt(index) + newSPI.next();
+				else{
+					index++;
+					return buffer.charAt(index) + newSPI.next();
+				}
+		}
+		return buffer;
+	}
+}
+
+	
+
+

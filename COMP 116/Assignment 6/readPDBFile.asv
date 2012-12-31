@@ -1,0 +1,22 @@
+function [ anum, aname, resno, coords ] = readPDBFile( infile )
+%readPDBFile walks trhough all the lines of a plain text file and finds the
+%atoms, adds their coordinates, residual numbers, names, and numers to the
+%four matrices.
+anum = [];
+aname = [];
+resno = [];
+coords = []; % establish empty matrices
+FID = fopen(infile); %read in file identifier
+while (~feof(FID));
+    line = fgetl(FID);
+    test = line(1:6);  % While there is still data, go line by line and test if the 
+    if strcmp(test, 'ATOM  ') == 1; %Name (line 1:6) is 'ATOM  '
+        anum = [anum; line(7:11)];
+        aname = upper([aname; line(13:16)]);
+        resno = [resno; line(23:26)];
+        coords = [coords; (line(31:38)) (line(39:46)) (line (47:54))]; %Add the data to the matrices
+    end
+end
+coords = (coords);
+end
+

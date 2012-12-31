@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+
+
+public class GVertex {
+
+	public class Adjac{
+		GVertex vertex;
+		int weight;
+		public Adjac(GVertex v, int w){
+			vertex = v;
+			weight = w;
+		}
+	}
+	String elt; 
+	ArrayList<Adjac> listAdj = new ArrayList<Adjac>(5);
+	public GVertex(String s){
+		elt = s;
+	}
+	
+	public void addAdj(String s, int w){
+		Adjac a = new Adjac(TheGraph.listVert.get((Integer) TheGraph.listNames.get(s)), w)
+		listAdj.add();
+	}
+	
+}

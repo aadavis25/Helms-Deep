@@ -1,0 +1,24 @@
+%1.Yes, while increasing overall
+%2. jord-178 fall-71
+%3. 
+%4.
+%5. 7 each, 1- 330 2- 324
+%6. site 2
+%7. site 1- 210.23
+%site2-1.46
+%site3-3.06
+%site4-2.55
+%8. 1 - 1.16
+ %   2 - 7.15
+  %  3 - 2.57
+   % 4 - 4.37
+
+%% Assignment 2 - Plotting
+%Aaron Davis
+
+%Question 1 Plot a line graph of depths for both lakes. (Is there an obvious yearly cycle?)
+plot (x1, jordepth, x1, falldept, 'g')
+title('Depth of Fall and Jordan Lakes monthly 1985 - 2007')
+legend ('Jordan Lake', 'Fall Lake')
+xlabel('Months')
+ylabel ('Depth in Inches')

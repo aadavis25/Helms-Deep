@@ -1,0 +1,99 @@
+import static java.lang.System.out;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+public class BoundedBagTest {
+	
+	// Data members
+	private BoundedBag empty, singleton, typical, full;
+	
+	@Before
+	public void setup() {
+		empty = new BoundedBag();
+		
+		singleton = new BoundedBag();
+		singleton.add(347);
+
+		typical = new BoundedBag();
+		typical.add(33);
+		typical.add(33);
+		typical.add(-33);
+		
+		full = new BoundedBag();
+		full.add(1);
+		full.add(2);
+		full.add(2);
+		full.add(-999999999);
+	}
+	
+	@Test
+	public void defaultConstructor() {
+		BoundedBag b0 = new BoundedBag();
+		out.println( "\n*** b0 after default constructor = " + b0 );
+		assertEquals(0, b0.size());
+	}
+	
+	@Test
+	public void add() {
+		out.println("\n*** add");
+		BoundedBag b1 = new BoundedBag();
+		b1.add(1);
+		out.println( "b1 = " + b1);
+		assertEquals(1, b1.size());
+		
+		b1.add(2);
+		out.println( "b1 = " + b1); 
+		assertEquals(2, b1.size());
+		
+		b1.add(2);
+		out.println( "b1 = " + b1);
+		assertEquals(3, b1.size());
+		
+		b1.add(-999999999);
+		out.println( "b1 = " + b1);
+		assertEquals(4, b1.size());
+	}
+	
+	@Test
+	public void contains(){
+		out.println("\n*** contains");
+		BoundedBag b2 = new BoundedBag();
+		b2.add(1);
+		b2.add(2);
+		b2.add(3);
+		b2.add(-4);
+		out.println("b2 = " + b2);
+		
+		assertEquals(true, b2.contains(1));
+		assertEquals(true, b2.contains(2));
+		assertEquals(true, b2.contains(3));
+		assertEquals(true, b2.contains(-4));
+		assertEquals(false, b2.contains(5));
+	}
+	
+	@Test
+	public void remove(){
+		out.println("\n*** remove");
+		BoundedBag b3 = new BoundedBag();
+		b3.add(12);
+		b3.add(34);
+		b3.add(85);
+		b3.add(-123);
+		out.println("b3 = " + b3);	
+		assertEquals(4, b3.size());
+		
+		assertEquals(false, b3.remove(23));
+		assertEquals(false, b3.contains(23));
+		out.println("b3 = " + b3);
+		
+		assertEquals(true, b3.remove(12));
+		assertEquals(false, b3.contains(12));
+		out.println("b3 = " + b3);
+		
+	}
+}

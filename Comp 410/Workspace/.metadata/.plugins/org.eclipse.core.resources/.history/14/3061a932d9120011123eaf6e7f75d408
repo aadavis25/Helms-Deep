@@ -1,0 +1,131 @@
+/**
+ * @author Aaron M Davis
+ * last edited: 11/15/11
+ */
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+public class TheGraph {
+	/* Data Members
+	 * @num will be where in the list of vertices the next vertex will go
+	 * @listNames will contain the String names of the vertices as the keys 
+	 * and the index of the vertex with that name as the object of that key
+	 * @listVert will contain all of the GVertex's in the graph
+	 */
+	int num = 0;
+	public  HashMap getListNames() {
+		return listNames;
+	}
+
+	public ArrayList<GVertex> getListVert() {
+		return listVert;
+	}
+
+	 HashMap listNames = new HashMap();
+	 ArrayList<GVertex> listVert = new ArrayList<GVertex>();
+	
+	//Constructor 
+	public TheGraph(){
+		;
+	}
+	
+	/**
+	 * add will add a nex GVertex to the graph
+	 * @param s is the String name of the Vertex
+	 * First, make a new GVertex with s as it's elt
+	 * Map the @num (index in @listVert) of the Vertex to the 
+	 * String name in HashMap @listNames
+	 * Add the GVertex to @listVert at location @num
+	 * Increment @num
+	 */
+	public void add(String s){
+		GVertex v = new GVertex(s);
+		listNames.put(s, num++);
+		listVert.add(v);
+	}
+	public int size(){
+		return listVert.size();
+	}
+	/**
+	 * @param source
+	 * @param dest
+	 * @param weight
+	 * Calls the addAdj method in GVertex class on the source node 
+	 */
+	public void addAdjac(String source, String dest, int weight){
+		this.getVert(source).addAdj(this.getVert(dest), weight);
+	  //listVert.get((Integer) TheGraph.listNames.get(source)) is the source node of the edge
+	}
+	
+	/**
+	 * @param s is the String name of the Vertex
+	 * @return the object GVertex associated with the String s
+	 */
+	
+	public GVertex getVert(String s){
+		return listVert.get((Integer) listNames.get(s));
+	}
+
+	public class GVertex {
+		/*Data members
+		 * @elt is the element of the vertex
+		 * @listAdj is the Vertex's adjacency list
+		 * @obj is the Dijktra's algorithm object of the vertex
+		 */
+		private String elt; 
+		private DijAlg.DijObj obj;
+		
+		//Getters and setters
+		public DijAlg.DijObj getObj() {return this.obj;}
+		public void setObj(DijAlg.DijObj obj) {this.obj = obj;}
+		public String getElt() {return elt;}
+		public ArrayList<Adjac> getListAdj() {return listAdj;}
+
+		private ArrayList<Adjac> listAdj = new ArrayList<Adjac>();
+		
+		
+
+		//constructor
+		public GVertex(String s){
+			elt = s;
+		}
+		
+		/**
+		 * 
+		 * @param s is the destination of the edge
+		 * @param w is the weight of the new edge
+		 * Adds a new directed adjacency from @this to the GVertex with String name @s
+		 */
+		public void addAdj(GVertex s, int w){
+			Adjac a = new Adjac(s, w);
+			listAdj.add(a);
+			int index = listAdj.size()-1;
+			if (index > 0){
+				while(listAdj.get(index-1).weight > listAdj.get(index).weight){
+					Adjac temp = listAdj.get(index-1);
+					listAdj.set(index-1,listAdj.get(index));
+					listAdj.set(index, temp);
+					index--;
+					if (index == 0) break; 	//If the object to be sorted was in the second spot before this sort,
+											//i.e. index was 1, and is now 0, we are done
+				}
+			}
+		}
+		public class Adjac{
+			/*Data Members
+			 * @vertex is the destination vertex of the edge
+			 * @weight is the weight of the edge
+			 */
+			private GVertex vertex;
+			private int weight;
+			public GVertex getVertex() {return vertex;}
+			public int getWeight() {return weight;}
+			public Adjac(GVertex v, int w){
+				vertex = v;
+				weight = w;
+			}
+		}
+	}
+		
+}

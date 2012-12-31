@@ -1,0 +1,33 @@
+/*
+import java.util.ArrayList;
+
+
+public class GVertex {
+
+	/*Inner Class 
+	*this class is an adjacency consisting of the the source (the node which contains this adjacency,)
+	*the destination of the adjacency, and the weight as an integer
+	
+	public class Adjac{
+		GVertex vertex;
+		int weight;
+		public Adjac(GVertex v, int w){
+			vertex = v;
+			weight = w;
+		}
+	}
+	String elt; 
+	ArrayList<Adjac> listAdj = new ArrayList<Adjac>(5);
+	
+	//constructor
+	public GVertex(String s){
+		elt = s;
+	}
+	
+	private void addAdj(String s, int w){
+		Adjac a = new Adjac(TheGraph.listVert.get((Integer) TheGraph.listNames.get(s)), w);
+		listAdj.add(a);
+	}
+	
+}
+*/

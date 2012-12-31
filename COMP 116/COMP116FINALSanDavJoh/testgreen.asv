@@ -1,0 +1,22 @@
+load('testgreenvar.mat');
+if count=0    
+    result = [];
+end
+g = 0;
+while 1
+    g = input('Please input your gender (m or f): ', 's');
+    a = input('Please input your age: ', 's');
+    if g == 'over'
+        return
+    end
+    image = imread('testgreenim.jpg');
+    imshow(image);
+    axis image;
+    [x,y] = ginput(1);
+    clf;
+    if ((y >= 225) && (y <= 469)) && ((x >= 665) && (x <= 887));
+        result = [result; g a 't'];
+    else 
+        result = [result; g a 'f'];
+    end
+end

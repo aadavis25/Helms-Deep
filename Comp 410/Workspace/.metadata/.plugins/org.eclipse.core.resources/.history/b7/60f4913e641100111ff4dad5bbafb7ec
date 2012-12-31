@@ -1,0 +1,105 @@
+/**
+ * @author Aaron M Davis
+ * last edited: 11/15/11
+ */
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+public class TheGraph {
+	/* Data Members
+	 * @num will be where in the list of vertices the next vertex will go
+	 * @listNames will contain the String names of the vertices as the keys 
+	 * and the index of the vertex with that name as the object of that key
+	 * @listVert will contain all of the GVertex's in the graph
+	 */
+	int num = 0;
+	static HashMap listNames = new HashMap(23, (float)0.5);
+	static ArrayList<GVertex> listVert = new ArrayList<GVertex>();
+	
+	//Constructor 
+	public TheGraph(){
+		;
+	}
+	
+	/**
+	 * add will add a nex GVertex to the graph
+	 * @param s is the String name of the Vertex
+	 * First, make a new GVertex with s as it's elt
+	 * Map the @num (index in @listVert) of the Vertex to the 
+	 * String name in HashMap @listNames
+	 * Add the GVertex to @listVert at location @num
+	 * Increment @num
+	 */
+	public void add(String s){
+		GVertex v = new GVertex(s);
+		listNames.put(s, num);
+		listVert.set(num, v);
+		num++;
+	}
+	public int size(){
+		return listVert.size();
+	}
+	/**
+	 * @param source
+	 * @param dest
+	 * @param weight
+	 * Calls the addAdj method in GVertex class on the source node 
+	 */
+	public void addAdjac(String source, String dest, int weight){
+		listVert.get((Integer) TheGraph.listNames.get(source)).addAdj(dest, weight);
+	  //listVert.get((Integer) TheGraph.listNames.get(source)) is the source node if the edge
+	}
+	
+	/**
+	 * @param s is the String name of the Vertex
+	 * @return the object GVertex associated with the String s
+	 */
+	
+	public GVertex getVert(String s){
+		return listVert.get((Integer) listNames.get(s));
+	}
+
+	//Vertex Class Begin
+	public class GVertex {
+		/*Data members
+		 * @elt is the element of the vertex
+		 * @listAdj is te Vertex's adjacency list
+		 */
+		String elt; 
+		ArrayList<Adjac> listAdj = new ArrayList<Adjac>(5);
+		
+		//constructor
+		public GVertex(String s){
+			elt = s;
+		}
+		
+		/**
+		 * 
+		 * @param s is the destination of the edge
+		 * @param w is the weight of the new edge
+		 * Adds a new directed adjacency from @this to the GVertex with String name @s
+		 */
+		private void addAdj(String s, int w){
+			Adjac a = new Adjac(TheGraph.listVert.get((Integer) TheGraph.listNames.get(s)), w);
+			listAdj.add(a);
+		}
+		
+		/*Inner Class 
+		*this class is an adjacency consisting of the the source (the node which contains this adjacency,)
+		*the destination of the adjacency, and the weight as an integer
+		*/
+		public class Adjac{
+			/*Data Members
+			 * @vertex is the destination vertex of the edge
+			 * @weight is the weight of the edge
+			 */
+			GVertex vertex;
+			int weight;
+			public Adjac(GVertex v, int w){
+				vertex = v;
+				weight = w;
+			}
+		}
+	}
+}

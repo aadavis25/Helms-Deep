@@ -1,0 +1,9 @@
+function [ DialatedImage ] = DialateImage( imag )
+%DialateImage finds the outside of the edge of an image and adds i to the
+%original image by comparing the 4 carnal scolling functions to the
+%original image.
+
+
+
+end
+

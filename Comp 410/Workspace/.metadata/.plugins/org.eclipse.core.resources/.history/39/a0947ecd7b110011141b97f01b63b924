@@ -1,0 +1,17 @@
+		public class Adjac{
+			/*Data Members
+			 * @vertex is the destination vertex of the edge
+			 * @weight is the weight of the edge
+			 */
+			GVertex vertex;
+			int weight;
+			public Adjac(GVertex v, int w){
+				vertex = v;
+				weight = w;
+			}
+			public int getWeight() {
+				return weight;
+			}
+			
+		}
+	}

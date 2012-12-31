@@ -1,0 +1,81 @@
+import static java.lang.System.out;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class program9 {
+	
+	
+	public static void main(String[] args){
+		
+		List<ArrayList<Object>> list= listFiles("E:\\Musac\\Ipod Music");
+		CompareName compname = new CompareName();
+		sort(compname,list);
+		out.println(list);
+
+		List<ArrayList<Object>> list2 = listFiles("E:\\Musac");
+		CompareSize compsize = new CompareSize();
+		sort(compsize,list2);
+		out.println(list2);
+	}
+	private static String FILE_TYPE = ".mp3";
+	
+	/**
+	 * @observer
+	 * @requires theDirectory is an absolute path to a dirListEle
+	 * @returns  list of all files whose names contain FILE_TYPE (not dirListEleectories) rooted at
+	 *    theDirectory
+	 */
+	public static List<ArrayList<Object>> listFiles( String theDirectory) {
+		ValidateUtilities.checkForContent(theDirectory); //make sure real directory is passed
+		
+		List<ArrayList<Object>> fileList = new ArrayList<ArrayList<Object>>();
+		File newDirectory = new File(theDirectory);
+		File[] dirList = newDirectory.listFiles();  //directory to file array
+		
+		recurseFileOrDir(dirList,fileList);
+		
+		return fileList;
+	}
+	/**
+	 * 
+	 * @mutator
+	 * @ensures dirList contains files and/or directories and if dirList[index] is a file it is added to fileList and if it is a directory, it is passed to listFiles
+	 */
+	private static void recurseFileOrDir( File[] dirList, List<ArrayList<Object>> fileList ){
+			for (int index=0; index<dirList.length;index++){
+			
+				if (dirList[index].getAbsoluteFile().isDirectory())
+					fileList.addAll(listFiles(dirList[index].toString())); //If directory, start recursion on it
+				
+				else if (dirList[index].getAbsoluteFile().isFile()){    //iff file, add to fileList 
+					if (dirList[index].getName().contains(FILE_TYPE)){
+						ArrayList<Object> nameAndSize = new ArrayList<Object>(); //create new array to be added to FileList
+						nameAndSize.add(dirList[index].getName());
+						nameAndSize.add(dirList[index].length());
+						
+						fileList.add(nameAndSize);
+				}
+				
+			}
+		}
+	}
+	
+	public static void sort(CompareFiles comp, List<ArrayList<Object>> fileList) {
+		ValidateUtilities.checkForEmpty(fileList);
+		for (int outer = 0; outer < fileList.size(); outer++) {
+			int smallest = outer;
+			for (int inner = outer+1; inner < fileList.size(); inner++) {
+
+				if (comp.compare(fileList.get(inner), fileList.get(smallest))<0) {
+					smallest = inner;
+				}	
+			}
+			ArrayList<Object> temp = fileList.get(outer);
+			fileList.set(outer, fileList.get(smallest));
+			fileList.set(smallest, temp);
+		}
+
+	}
+}

@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+public class Graph {
+
+	int num = 0;
+	HashMap listNames = new HashMap(23, (float)0.5);
+	ArrayList<GVertex> listVert = new ArrayList<GVertex>(20);
+	
+	
+	public Graph(){
+		;
+	}
+	public void add(String s){
+		GVertex v = new GVertex(s);
+		listNames.put(s, num);
+		listVert.set(num, v);
+		num++;
+	}
+	
+	
+}

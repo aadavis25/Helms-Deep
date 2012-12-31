@@ -1,0 +1,8 @@
+
+public class Unscrambler {
+
+	WordListInterface wordList = new EnglishWordList();
+	wordList.initialize();
+	
+	
+}

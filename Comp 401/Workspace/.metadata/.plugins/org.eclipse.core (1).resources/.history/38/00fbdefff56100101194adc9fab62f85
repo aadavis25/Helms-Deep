@@ -1,0 +1,85 @@
+import static java.lang.System.out;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
+
+public class AnalyzeAccFootball {
+	private static AccFootballTeam[] team;
+
+	public static void main(String[] args) throws FileNotFoundException {
+		team = new AccFootballTeam[4];
+		team[0] = new AccFootballTeam("unc", "tar heels", "south", 10, 0);
+		team[1] = new AccFootballTeam("dook", "blue devils", "loser", 0, 10);
+		team[2] = new AccFootballTeam("ncsu", "wolfpack", "loser", 1, 9);
+		team[3] = new AccFootballTeam("wfu", "deacons", "south", 3, 7);
+		display();
+		sort();
+		out.println();
+		display();
+		out.println();
+
+	}
+
+	public static void sort() {
+
+		for (int outer = 0; outer < team.length; outer++) {
+			int smallest = outer;
+			for (int inner = outer+1; inner < team.length; inner++) {
+
+				if (team[inner].getWon() < team[smallest].getWon()) {
+					smallest = inner;
+				}
+				
+			}
+			AccFootballTeam temp = team[outer];
+			team[outer] = team[smallest];
+			team[smallest] = temp;
+		}
+	}
+
+	public static void display() {
+		for (int i = 0; i < 4; i++) {
+			out.println(team[i]);
+		}
+	}
+	
+	public static void sort(int sortType){
+		for (int outer = 0; outer < team.length; outer++) {
+			int smallest = outer;
+			for (int inner = outer+1; inner < team.length; inner++) {
+
+				switch (sortType){
+				case 1: if (team[inner].getName().compareTo(  team[smallest].getName()) <1) 
+					smallest = inner;
+				case 2: if (team[inner].getWon() < team[smallest].getWon()) 
+					smallest = inner;
+				case 3: if(team[inner].getDivision().compareTo(  team[smallest].getDivision()) <1)
+					smallest = inner;
+				//keep going with whatever comparision needed
+				}
+			AccFootballTeam temp = team[outer];
+			team[outer] = team[smallest];
+			team[smallest] = temp;
+			}
+		}
+	}
+	public static void sort(CompareElements comp) {
+		for (int outer = 0; outer < team.length; outer++) {
+			int smallest = outer;
+			for (int inner = outer+1; inner < team.length; inner++) {
+
+				if (comp.compare(team[inner], team[smallest])<1) {
+					smallest = inner;
+				}
+				
+			}
+			AccFootballTeam temp = team[outer];
+			team[outer] = team[smallest];
+			team[smallest] = temp;
+		}
+
+	}
+	
+
+}

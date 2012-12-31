@@ -1,0 +1,12 @@
+import java.util.ArrayList;
+
+
+public class GVertex {
+
+	String elt; 
+	ArrayList<GVertex> listAdj = new ArrayList<GVertex>(5);
+	public GVertex(String s){
+		elt = s;
+	}
+	
+}

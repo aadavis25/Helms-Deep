@@ -1,0 +1,97 @@
+%% Assignment 4 - Binary Image Manipulation
+% Aaron Davis
+% I pledge that this assignment is legitimate and the work herein is my own
+% and that I received no unauthorized assistance to complete said
+% assignment.
+
+img = imread('fish-a059.gif');
+binaryfish = logical(img);
+%% (1) Display the binary test image you are using, unmodified.
+imshow(binaryfish);
+
+%Web Address: http://www.lems.brown.edu/~dmc/Fish.html
+%Dimensions: 95px x 152px
+
+%% (2)Scroll that test image up by 10 pixels and display the result.
+fish2 = scrollUp(binaryfish, 10);
+imshow(fish2);
+
+%% (3) Scroll the test image down by 10 pixels and display the result.
+fish3 = scrollDown(binaryfish, 10);
+imshow(fish3);
+
+%% (4) Scroll the test image left by half its width and display the result.
+sizef = size(binaryfish);
+fish4= scrollLeft(binaryfish, (sizef(:,2)/2));
+imshow(fish4);
+
+%% (5) Scroll the result image from (4) back to the right by the same amount
+% and display the result.
+fish5 = scrollRight(binaryfish, (sizef(:,2)/2));
+imshow(fish5);
+
+%% (6) In a comment, answer this question in your own words. Is the image
+% from (5) the same as the original image? Why or why not?
+
+%The image in (5) is not identical to the original because when the image
+%was moved to the left in 4, the part that moved off of the edge of the
+%image was lost, so when it was moved back to the right there was only
+%black space.
+
+%% (7) Compute and display the boundary image.
+fish7 = FindBoundary(binaryfish);
+imshow(fish7);
+
+%% (8) Dilate your test image. Then dilate that result. Then dilate that
+%result. (So the original image will now have been dilated three times).
+%Display the result.
+fish8 = DialateImage(DialateImage(DialateImage(binaryfish)));
+imshow(fish8);
+
+%% (8) Erode your test image. Then erode that result. Then erode that result.
+%(So the original image will now have been eroded three times). Display the
+%result.
+erodef = ErodeImage(ErodeImage(ErodeImage(binaryfish)));
+imshow(erodef);
+
+%% (9) Take the result image from (8), and dilate it 3 times. Display the
+% result.
+fish9 = DialateImage(DialateImage(DialateImage(erodef)));
+imshow(fish9);
+
+%% (10) In a comment, answer this question in your own words. Is the image
+%from (9) the same as the original image? Why or why not?
+
+%The Image in (9) would not be the same as the original simply because of
+%the amount of information about shape lost in the erosion, and the jagged
+%edges, etc. created in erosion.
+
+%% (11) Find the boundary of the test image. Dilate it once. Display the
+% result.
+boundaryf = (FindBoundary(binaryfish));
+fish11 = DialateImage(boundaryf);
+imshow(fish11);
+
+%%(12) Dilate the test image once, then find the boundary of the result.
+%Display this image.
+dialatedf = DialateImage(binaryfish);
+fish12 = FindBoundary(dialatedf);
+imshow(fish12);
+
+%% (13) In a comment, answer this question in your own words. What is the
+% difference, if any, between the images from (11) and (12)?
+
+%The image in (11) is the boundary of the dialated image. It is 1 pixel
+%wide and at the "area of boundary" of the dialated image. The image in
+%(12) is the boundary of the original image itself, dialated. It is more
+%than 1 pixel wide and at the "area of boundary" for the original image.
+%The main difference is width of the line, but the placing is altered also.
+
+%% Conclusion
+
+%I had difficulty figuring out the logistics of finding the boundary of and
+%dialating the image ecause of the complex logical statement. I really
+%learned a substantial amount from the assignment. It helped me understand
+%logical operators (which I had trouble with previously, not due to the
+%quality of the lectures of course XD.) I also really began to understand
+%the logistics and functionality of functions.

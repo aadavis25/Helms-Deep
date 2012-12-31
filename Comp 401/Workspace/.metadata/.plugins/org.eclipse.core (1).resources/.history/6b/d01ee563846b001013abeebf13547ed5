@@ -1,0 +1,71 @@
+import java.lang.*;
+
+public class StringPermutationIterator {
+	
+	
+	String buffer;
+	int index;
+	StringPermutationIterator newSPI;
+	
+	public StringPermutationIterator(String s){
+		//System.out.println(s);
+		buffer = s;
+		index=0;
+		if (buffer.length() > 1)
+			newSPI = new StringPermutationIterator(buffer.substring(1));
+		else
+			newSPI = null;
+	}
+
+	public boolean hasNext() {
+		return newSPI != null;
+	}
+
+	public String next() {
+		//String result = buffer;
+		buffer = createNextElement();
+		System.out.println("1" + buffer);
+		//return result;
+		return buffer;
+	}
+	
+	private String createNextElement(){
+/*		if (index >= buffer.length()-1||buffer.length()==1){
+			return buffer;
+		}
+			
+		else{
+			if(newSPI.hasNext()){
+				String tmp = newSPI.next();
+				System.out.println("2" + tmp);
+				return buffer.charAt(index) + tmp;
+				//return buffer.charAt(index) + newSPI.next();
+			}
+			
+			else{
+				index=index+1;
+				if (buffer.length()<=2)
+					newSPI = new StringPermutationIterator(buffer.substring(0,1));
+				else 
+					newSPI = new StringPermutationIterator(buffer.substring(0,index-1)+buffer.substring(index+1,buffer.length()));
+				
+				String tmp = newSPI.next();
+				System.out.println("3"+tmp);
+				return buffer.charAt(index) + tmp;
+				//return (buffer.charAt(index) + newSPI.next());
+			
+			}
+		}*/
+		if(newSPI.hasNext()){
+			String tmp = newSPI.next();
+			System.out.println("2" + tmp);
+			return buffer.charAt(index) + tmp;
+			//return buffer.charAt(index) + newSPI.next();
+		}
+		else{
+			return buffer;
+		}
+	}
+}
+
+	

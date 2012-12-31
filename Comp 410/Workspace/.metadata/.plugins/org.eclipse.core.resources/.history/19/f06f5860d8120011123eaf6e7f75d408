@@ -1,0 +1,119 @@
+import java.util.ArrayList;
+
+
+public class PriQueue {
+	int size = 0;
+	queItem head = null;
+	queItem tail = null;
+	
+	/**
+	 * @return minimum queue item 
+	 */
+	public queItem deq(){
+		queItem temp = head;
+		size--;
+		if (size == 0){
+			head = null; tail = null;
+		}
+		else
+			head = head.next;
+		if (head != null){ 	
+			head.prev = null;
+		}
+		nullify(temp);
+		return temp;
+	}
+	
+	/**
+	 * 
+	 * @param v is the vertex to be added to the queue
+	 * @param p is the priority of the item
+	 * create a new queItem from the vertex and the priority, put them at the back of the queue 
+	 * and sort the queue
+	 * 
+	 */
+	public void enq(TheGraph.GVertex v, int p){
+		queItem q = new queItem(null, tail, v, p);
+		size++;
+		if (size > 1){
+			tail.next = q;
+			q.prev = tail;
+			tail = q;
+			sort(q);
+		}
+		else{
+			head = q;
+			tail = q;
+		}
+	}
+	
+	
+	/**
+	 * @param q is the queue item just added to the list
+	 * look at the item ahead of q in the list, if it's prority is lower, switch places
+	 * Special cases for head and tail items.
+	 */
+	void sort(queItem q){
+		while(q.prev.priority > q.priority){
+			if (q == tail)
+				tail = q.prev;
+			if (q.prev == head)
+				head = q;
+			queItem tempNext = q.next;
+			queItem tempPrev = q.prev.prev;
+			q.next = q.prev;
+			q.prev = tempPrev;
+			q.next.next = tempNext;
+			q.next.prev = q;
+			if (tempNext != null) tempNext.prev = q.next;
+			if (tempPrev != null) tempPrev.next = q;
+			if (head == q) break;
+		}
+	}
+	
+	/**
+	 * @param q item to be nullified 
+	 * Make pointers of the object null
+	 */
+	public void nullify(queItem q){
+		q.prev = null;
+		q.next = null;
+	}
+	
+	/**
+	 * @return size of the queue
+	 */
+	public int size() {
+		return size;
+	}
+	
+	/*
+	 * Inner class of items that go in to the queue
+	 */
+	public class queItem{
+		/*Data members
+		 * @prev is the item before the queItem
+		 * @next is the item behind the queItem (both can be null if queItem is head or tail)
+		 * @node is the node contained in the queItem
+		 * @priority is the priority of the queItem, determining its place in the queue
+		 */
+		queItem prev;
+		queItem next;
+		TheGraph.GVertex node;
+		int priority;
+		//getter
+		public TheGraph.GVertex getNode() {return node;}
+		//constructor
+		public queItem(queItem nex, queItem pre,TheGraph.GVertex n, int p){
+			next = nex;
+			prev = pre;
+			node = n;
+			priority = p;
+		}
+		
+		/*public queItem(TheGraph.GVertex n, int p){
+			node = n;
+			priority = p;
+		}*/
+	}
+}

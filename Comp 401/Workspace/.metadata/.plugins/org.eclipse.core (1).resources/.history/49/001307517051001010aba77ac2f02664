@@ -1,0 +1,94 @@
+
+import static java.lang.System.out;
+
+
+class WordList {
+
+	/**
+	 * WordList - a list of words. Used as a lookup dictionary for a spelling
+	 * checker.
+	 * 
+	 * <P>
+	 * This class was written to illustrate: good programming style,
+	 *  and maximum use of self checking code. <B>Note
+	 * that for a class as simple as WordList, this is overkill.</B> In
+	 * practice, an experienced programmer would dispense with much (all?) the
+	 * self checking and testing and rely on the correctness of the
+	 * implementation of the Java Collection Class TreeSet.
+	 * </P>
+	 * 
+	 * <P>
+	 * Implementation Plan 1. add, toString - quick testing using
+	 * System.out.println 2. contains, size - begin jUnit testing 3. readFile -
+	 * the class is now ready to be used in SpellChecker application 4. clear
+	 */
+
+	Set<String> words;
+
+	/**
+	 * Default constructor.
+	 */
+	WordList() {
+		words = new TreeSet<String>();
+	}
+
+	/**
+	 * Add specified word to this word list if not already present. Return true
+	 * if theWord was not present in the WordList.
+	 */
+	boolean add(String theWord) {
+		int oldSize = size();
+		boolean result = false;
+		words.add(theWord);
+		if (words.size() > oldSize)
+			result = true;
+		return result;
+	}
+
+	/**
+	 */
+	void clear() {
+		words.clear();
+	}
+
+	/**
+	 */
+	boolean contains(String theWord) {
+		boolean result = words.contains(theWord);
+		return result;
+	}
+
+	/**
+	 * Add contents of file to this word list.
+	 * 
+	 * @requires input file consists of words separated by one or more spaces.
+	 * @param fileName -
+	 *            name of file to read
+	 * @throws FileNotFoundException
+	 */
+	void readFile(String fileName) throws FileNotFoundException {
+
+		Scanner inp = new Scanner(new File(fileName));
+		while (inp.hasNext()) {
+			String line = inp.nextLine();
+			String[] word = line.split(" ");
+			for (int i = 0; i < word.length; i++)
+				words.add(word[i].trim());
+		}
+	}
+
+	/**
+	 * Return the number of entries in this WordList. Used for testing.
+	 */
+	int size() {
+		return words.size();
+	}
+
+	/**
+	 * Return a String representation of all words in this WordList
+	 */
+	String toString() {
+		return words.toString();
+	}
+
+}

@@ -1,0 +1,22 @@
+function [ hBondPairs ] = hBonds ( anum, aname, resno, coords )
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+tic
+hBondPairs = [];
+for i = 1:length(anum)-1
+    for j = i:length(anum)
+        if (strcmp(aname(i,2), 'O') || strcmp(aname(i,2), 'N')) && (strcmp(aname(j,s), ' O  ') || strcmp(aname(j,:), ' N  ')) && (~strcmp(aname(i,:), aname(j,:)));   
+           d = ((coords(i,1) - coords(j,1))^2 + (coords(i,2) - coords(j,2))^2 + (coords(i,3) - coords(j,3))^2)^.5;
+           if (d > 2.6) && (d < 3.2) 
+               resdiffi = resno(i);
+               resdiffj = resno(j);
+               if abs(resdiffi - resdiffj) >= 2
+                   hBondPairs = [hBondPairs; anum(i) anum(j)];
+               end
+           end
+        end
+    end
+end
+toc
+end
+

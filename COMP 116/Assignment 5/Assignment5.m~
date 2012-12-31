@@ -1,0 +1,32 @@
+%% Assignment 5 - Aaron Davis
+% I pledge that I recieved nor gave authorized assistance on this
+% assignment.
+%% (1) Say (in text) how many pits and peaks were in map.
+pitlist = findPits(map);
+[pits, col] = size(pitlist);
+% There are 57 pits in the map.
+peaklist = findPits(-map);
+[peaks, col] = size(pitlist);
+% There are 273 peaks in the map.
+%% (2) Display map as a grayscale image, with pits and peaks marked 
+%% on top of it. You can use the following code to do this:
+pits = findPits(map);
+peaks = findPits(-map);
+imagesc(map); colormap(gray); axis equal
+hold on
+plot(pits(:,2),pits(:,1),'ro');
+plot(peaks(:,2),peaks(:,1),'g+');
+hold off
+%% (3) Display map as a grayscale image with the path of a single raindrop
+%% drawn on it as discussed above. The resulting image should look
+%% something like the image at right (of course, it will be different
+%% depending on what pixel was clicked.
+clacPath(map);
+%% (4) Compute the flow matrix as discussed above. Plot an image
+%% of all of the pixels that have flow greater than 200. The output
+%% image should be like the image at right
+mapflow = flowmap(map, 200);
+imagesc(mapflow); colormap(gray); axis equal;
+title('map of flow>200')
+%% (5)
+

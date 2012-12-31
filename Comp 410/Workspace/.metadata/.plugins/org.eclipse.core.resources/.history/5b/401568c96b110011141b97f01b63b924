@@ -1,0 +1,14 @@
+
+
+public class TheGraphTest {
+
+	TheGraph gr = new TheGraph();
+	gr.add("Raleigh");
+	gr.add("Chapel_Hill"); 
+	gr.add("Durham");
+	
+	@Test
+	public void add(){
+		
+	
+}

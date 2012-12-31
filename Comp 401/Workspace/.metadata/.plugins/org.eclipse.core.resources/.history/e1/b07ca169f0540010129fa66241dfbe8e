@@ -1,0 +1,57 @@
+import java.awt.List;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class SpellChecker {
+
+	public static void main(String[] args) throws FileNotFoundException{
+		readInWords();
+		spellCheck("Acapulco tenuous ziff Kye Hedlund zener galvani mediae medial medially Isis kjkjlkjlkj indemonstrably");
+	}
+	
+	
+	public static WordList wordlist = new WordList();
+	
+	
+	//wrote this in linux, so the readFile would only work in linux (but I guess you aren't going to run it so....)
+	public static void readInWords() throws FileNotFoundException{
+		wordlist.readFile("/home/magwe25/Dropbox/Comp 401/Workspace/Program8/bin/english0.txt");
+		wordlist.readFile("/home/magwe25/Dropbox/Comp 401/Workspace/Program8/bin/english1.txt");
+		wordlist.readFile("/home/magwe25/Dropbox/Comp 401/Workspace/Program8/bin/english2.txt");
+		wordlist.readFile("/home/magwe25/Dropbox/Comp 401/Workspace/Program8/bin/english3.txt");
+	}
+	public static void spellCheck( String theString ){
+		Set<String> wordsToCheck = stringToWords(theString);
+		Iterator<String> itr = wordsToCheck.iterator();
+		int index = 1;
+		String word = "";
+		while (itr.hasNext()){	
+			word = itr.next();
+			if (!wordlist.contains(word)){
+				System.out.println("There is a spelling error at word " +index);
+				System.out.println("The word that is spelled wrong is " +word);
+			}
+			index++;
+		}
+		
+	}
+	public static Set<String> stringToWords(String theString){
+		Set<String> wordsToCheck = new HashSet<String>();
+		String currentword = "";
+		for (int index=0; index<theString.length();index++){
+			if (!(theString.charAt(index) == ' ')){
+				currentword = currentword + theString.charAt(index);	
+			}
+		
+			else {
+				wordsToCheck.add(currentword);
+				currentword = "";
+			}
+			}
+		return wordsToCheck;
+		}
+	}

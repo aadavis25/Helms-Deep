@@ -1,0 +1,18 @@
+function [ CAgraph ] = drawCA( aname, coords )
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
+
+nameCoord = [aname coords];
+
+CAcoords = []
+[row,col] = size(nameCoord);
+for line = 1:row; 
+    test = nameCoord(line, 2:3);
+    if strcmp(test, 'CA') == 1
+    CAcoords = [CAcoords; (nameCoord(line,6:12)), (nameCoord(line,15:20)) (nameCoord(line,22:28))];
+    end     
+
+end
+CAcoords
+CAgraph = plot3(CAcoords(:,1), CAcoords(:,2), CAcoords(:,3), '-r*');
+end

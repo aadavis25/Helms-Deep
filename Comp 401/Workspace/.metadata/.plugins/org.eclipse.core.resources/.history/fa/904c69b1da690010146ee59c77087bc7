@@ -1,0 +1,35 @@
+public class StringPermutationIterator {
+	
+	
+	char[] bufferChar;;
+	
+	public StringPermutationIterator(char[] characterArray){
+		bufferChar = characterArray;
+	}
+
+	public boolean hasNext() {
+		return bufferChar.toString() != null;
+	}
+
+	public String next() {
+		String result = bufferChar.toString();
+		bufferChar = createNextElement();
+		return result;
+	}
+	
+	public String createNextElement(){
+		return createNextElementHelper(0);
+	}
+	
+	public String createNextElementHelper( int index ){
+		if (index < bufferChar.length ){
+			StringPermutationIterator newSPI = new StringPermutationIterator();
+			newSPI.buffer = buffer.
+			bufferChar[index] + newSPI.createNextElement();
+			
+		}
+	}
+
+	
+
+}

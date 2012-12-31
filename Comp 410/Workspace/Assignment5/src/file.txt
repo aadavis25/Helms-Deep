@@ -1,0 +1,16 @@
+Durham Raleigh 14
+Chapel_Hill Raleigh 500
+Chapel_Hill Durham 6
+Chapel_Hill Wake_Forest 52
+Durham Wake_Forest 12
+Durham Greensboro 20
+Raleigh Asheboro 18
+Greensboro Asheboro 2
+Durham London 20
+Durham Moscow 1000
+London Germany 50
+London Moscow 500
+Germany Moscow 100
+Chapel_Hill Moscow 5
+STOPHERE
+Chapel_Hill

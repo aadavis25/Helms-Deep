@@ -1,0 +1,24 @@
+function [ pitList ] = findPits( map )
+%findPits uses the rowoff and coloff matrices found in findLowNeighbor and
+%locates points whos row offsets and column offsets are both 0.
+
+[r,c] = size(map);
+[rowoff, coloff] = FindLowNeighbor(map);
+i = rowoff(2:(r-1),2:(c-1)); 
+j = coloff(2:(r-1),2:(c-1));
+pitList = [];
+logical(i);
+logical(j);
+m = i|j;
+%for g = 1:(c-1);
+ %   for h = 1:(r-1);
+  %      if g,h == 0
+   %         pitList = [pitList; g h]
+    %    end
+    end
+end
+
+
+pitList
+end
+

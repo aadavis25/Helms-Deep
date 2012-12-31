@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+@author Aaron Davis
+Weather webapp using http://free.worldweatheronline.com API
+key e48f35aa86045009121210
+
+
+-->
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Weather is FUN!</title>
+	<link rel="stylesheet" type="text/css" href="CSS/styles.css" >
+	<link rel="shortcut icon" href="images/favicon.png" type="image/png" />
+	<link rel="icon" href="images/favicon.png"  />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+	<script src="js/events.js" type="text/javascript"></script>
+	<script src="js/user.js" type="text/javascript"></script>
+	<script src="js/WeatherBox.js" type="text/javascript"></script>
+	<script src="js/populateCanvas.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<div id="header">
+		<h1>Weather is FUN.</h1>
+		<a href="Outfits.html">Outfit Manager</a>
+		<a href="Events.html">Events</a>
+		<div id = "login">
+		<form id="loginForm">
+			<label for="username">Username</label>
+			<input type="text" id="username" name='user'>
+			<label for="password">Password</label>
+			<input type="password" id="password" name='pass'>
+			<input type="submit" id="submit" value = "Submit">
+			<!--<input type='hidden' id="zipcode"  name="zip">-->
+		</form>
+		</div>
+		<span>
+		<div id ="zipdiv">
+		<form id="zipform" method="post">
+			<label for="zipbox">Zipcode</label>
+			<input id="zipbox" name="zip" type="text">
+			<input type="submit"  value="Go" />
+		</form>
+	</div>
+		
+	</div>
+	<div id="weather-info-div">
+	</div>
+	<div id = "user_creation">
+		<form id = "userCreateForm">
+			<div>Create an account!</div>
+			<label for = "createFirstName">Name:</label>
+			<input type = "text" id = "createFirstName" name = 'name'>
+			<br>
+			<label for = "createUsername">Username:</label>
+			<input type = "text" id = "createUsername" name = 'login'>
+			<br>
+			<label for = "createPassword">Password:</label>
+			<input type = "text" id = "createPassword" name = 'password'>
+			<br>
+			<label for = "createZipCode">Zip Code:</label>
+			<input type = "text" id = "createZipCode" name = 'zip'>
+			<input type = "submit" id = "createSubmit" value = "Create!">
+		</form>
+	</div>
+
+
+	<!--I hate fantasy football-->
+<div id="footer">
+    Elijah Batkoski - 720006899 <br>
+    Aaron Davis - 720018223 <br>
+    Nicole Busby - 720008364
+</div>
+
+</body>
+
+</html>

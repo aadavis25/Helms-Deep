@@ -1,0 +1,48 @@
+#import <stdio.h>
+#import <string.h>
+
+
+void printString(char string[]){
+	string[80] = '\n';
+	printf("%.*s", strlen(string), string);
+}
+
+void emptyString(char string[]){
+	memset(string, 0, strlen(string));
+}
+
+int main(void){
+        char print[82] = "\0";
+	char *ch = 0;
+	char c;
+	int n;
+	int i;
+	
+ 	do {   
+       		ch = (char*) realloc (ch, n+1);
+	        c = fgetc (stdin);
+         	ch[n] = c;
+         	if (c != EOF)
+             		n++;
+	} while (c!=EOF);
+ 	for (i = 0; i < n; i++){
+                /*test for double-asterisk*/
+                if (ch[i] == '*' & print[strlen(print)-1] == '*'){
+                                print[strlen(print)-1] = '^';
+		}
+                /* test for carriage return */
+                else if (ch[i] == '\n'){
+                        print[strlen(print)] = ' ';
+			/*string has reached length 81 and is ended with a carriage return, print and start over*/
+		}
+                else{
+                        print[strlen(print)] = (char)ch[i];
+                        /*string has reached length 81 and is not ended with a carriage return, move on*/
+		}
+
+		if (strlen(print) == 80){
+			printString(print);
+			emptyString(print);
+		}
+	}
+}

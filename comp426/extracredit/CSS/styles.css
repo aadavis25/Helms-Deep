@@ -1,0 +1,145 @@
+* {
+	font-family: 'Garamond', sans-serif;
+}
+
+body{
+	margin:0px;
+}
+
+#container{
+	background:url('http://images1.wikia.nocookie.net/__cb20101110222010/mspaintadventures/images/1/11/Horrorterror.jpg') 100% 100% fixed;
+	padding-right:230px;
+	padding-left:50px;
+	position:relative;
+}
+
+p{
+	text-align:justify;
+}
+
+#intro {
+	/*background:url('../images/Untitled.png') 100% 100%;*/
+	font-size:15px
+	min-width: 400px;
+	width: 100%;
+	z-index:1;
+	overflow:hidden;
+	position:relative;
+	
+}
+/*wanted a transparent bg without having to edit image. Insert pseudo element*/
+#intro:before {
+	id:'bg';
+	position:absolute;
+	top:0;
+	z-index:-1;
+	left:0;
+	height:100%;
+	width:100%;
+	opacity:0.4;
+	content: url('../images/bg.png');
+	
+	
+}
+#pageHeader{
+	width:500px;
+	float:left
+	font-size:20px;
+	border: #ddd 5px solid;
+	text-align:center;
+}
+h1, h3{
+	text-align:center;
+	padding: 20px 0px 20px 0px;
+	color:#ddd;
+	background:url('../images/titlebg.png') 20%;
+	background-size:100% 100%;
+	width:auto;
+}
+h2{
+	text-decoration:underline;
+}
+#intro div{
+	color:#aaa;
+	
+}
+#quickSummary{
+	clear: both; 
+	margin: 20px 20px 20px 10px; 
+	width: 400px; 
+	
+}
+#preamble{
+	clear:right;
+	padding:0px 10px 0px 10px;
+}
+#intro + div{
+	margin-left:30px;
+	margin-right:30px;
+	color:#ccc;
+}
+#footer{
+	background:url('http://www.cherryyarn.com/wordpress/wp-content/uploads/2012/05/footer-background-2-150x150.jpg') 100% 100%;
+	text-align:center;
+	height:50px;
+}
+#footer a{
+	text-transform:uppercase;
+	font-weight:bold;
+	font-size: 120%;
+}
+#intro a, #supportingText a{
+	color:#5c6d95;
+}
+#linkList{
+	margin-top:50px;
+	position:absolute;
+	top:0;
+	right:0;
+	margin-left:600px;
+	border: solid 2px white;
+	
+}
+#linkList2{
+	width:200px;
+	padding:10px;
+	font-size:15px;
+	color: #fff
+	
+}
+#linkList a{
+	color:#351e84;
+	text-transform:uppercase;
+	text-decoration:none;
+
+}
+#linkList  a.c{
+	color:#666;
+	display:inline-block;
+}
+
+#extraDiv1 {
+	position:fixed;
+	top:0;
+	left:0;
+	width:45px;
+	height:100%;
+	padding-bottom:0px;
+	/* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(left, #000000 0%, #382A6B 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(left, #000000 0%, #382A6B 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(left, #000000 0%, #382A6B 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #000000), color-stop(1, #382A6B));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(left, #000000 0%, #382A6B 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to right, #000000 0%, #382A6B 100%);
+}

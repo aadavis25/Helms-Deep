@@ -1,0 +1,132 @@
+*{
+	font-family:Verdana, Geneva, sans-serif;
+	color:#ff0000;
+}
+/***HEADER********
+*****************/
+#header h1{
+	padding:2px;
+	background:#2E96FF url('../images/title_bg.png') repeat-x bottom;
+}
+#header{
+	background-color:#7AFF7A;
+	height:150px;
+
+}
+#daily, #HBH {
+	float:right;
+	margin-right: 20px;
+}
+
+#zipdiv {
+	float:right;
+}
+
+#header div{
+	width:100%;
+}
+#header a{
+	font-style:oblique;
+	text-decoration: none;
+	color:#008AB8;
+	float:left;
+	margin-right: 20px;
+	margin-left: 5px;
+	border-style:dotted;
+	border-width:1px;
+	padding:2px;
+	font-size:110%;
+}
+#header a:hover { 
+	background-color: #FF9494;
+}
+#header a:visited {
+	color:#962EFF;
+}
+#header form{
+	margin-right: 10px;
+	position:relative;
+	float:right;
+	border-style:dotted;
+	border-width:1px;
+	padding:2px;
+}
+/*homepage weather info body*/
+.name{
+	font-style: bold;
+	font-family: "Arial Black", Gadget, sans-serif;
+	font-size: 120%;
+	color:#0000FF;
+
+}
+#weather-info-div {
+	height:auto;
+	margin-left:50px;
+	margin-right:50px;
+}
+#weather-info-div .wb-div{
+	width:400px;
+	height:200px;
+	margin:25px;
+	position:relative;
+}
+#weather-info-div canvas{
+	position:relative;
+}
+
+/*footer*/
+#footer {
+    background-color:#2E96FF;
+    height:50px;
+    position:relative;
+    bottom:0%;
+    font-size:12px;
+    color:white;
+    text-align: center;
+}
+
+/*calendar Page*/
+#calendar{
+
+}
+#calendar canvas{
+	border : 1px black solid;
+}
+
+/*Events Page*/
+
+#eventcreation {
+	display: none;
+}
+#events {
+	display:none;
+}
+#eventName {
+	font-size: 20px;
+	color: black;
+}
+
+#selection {
+	text-align: center;
+
+}
+#user_creation {
+}
+
+#createButton {
+	float: right;
+}
+
+#selection a{
+	color: #008AB8;
+}
+#selection a:visited{
+	color: #962EFF;
+}
+#eventcreate {
+	color: #FF66CC;
+}
+
+#showformbutton {
+	color: #FF66CC;
+}
